@@ -390,8 +390,26 @@ navLinks.forEach((link) => {
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
+  const bookBar = document.createElement("a");
+  bookBar.className = "book-bar";
+  bookBar.textContent = "Book now";
+  bookBar.href = document.getElementById("booking") ? "#booking" : "/#booking";
+  document.body.appendChild(bookBar);
+  document.body.classList.add("has-book-bar");
+  const bookingSection = document.getElementById("booking");
+  let bookBarObserver;
+  if (bookingSection) {
+    bookBarObserver = new IntersectionObserver((entries) => {
+      const seen = entries.some((entry) => entry.isIntersecting);
+      bookBar.hidden = seen;
+      document.body.classList.toggle("has-book-bar", !seen);
+    }, { threshold: 0.25 });
+    bookBarObserver.observe(bookingSection);
+  }
+
   trackView();
   applyDesk();
+  placeVisitor();
   window.addEventListener("storage", applyDesk);
   return function () {
     window.removeEventListener("storage", applyDesk);
@@ -401,6 +419,9 @@ navLinks.forEach((link) => {
     document.body.removeEventListener("click", onBodyClick);
     document.removeEventListener("click", onTrackedClick, true);
     if (spy) spy.disconnect();
+    if (bookBarObserver) bookBarObserver.disconnect();
+    bookBar.remove();
+    document.body.classList.remove("has-book-bar");
   };
 }
 
@@ -734,6 +755,60 @@ function renderReviews(items) {
   });
 }
 
+function cleanPlace(text) {
+  return String(text || "").replace(/\s+(Tehsil|District|Division)$/i, "").trim();
+}
+
+function placeLabel(address) {
+  if (!address) return "";
+  const area = address.neighbourhood || address.suburb || address.quarter || address.city_district || address.residential || address.hamlet || address.village;
+  const city = address.state_district || address.town || address.city || address.county;
+  const parts = [];
+  [area, city, address.state].forEach((part) => {
+    const text = cleanPlace(part);
+    if (!text || /municipal|corporation/i.test(text)) return;
+    if (parts.some((item) => item.toLowerCase() === text.toLowerCase())) return;
+    parts.push(text);
+  });
+  return parts.join(", ");
+}
+
+function setVisitorPlace(label, href) {
+  document.querySelectorAll("a.visitor-place").forEach((link) => {
+    const spot = link.querySelector(".visitor-spot");
+    if (spot) spot.textContent = label;
+    if (href) link.href = href;
+    link.title = label;
+  });
+}
+
+function readVisitorPlace(lat, lng) {
+  const href = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng;
+  const url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=1&zoom=16&lat=" + lat + "&lon=" + lng;
+  return fetch(url, { headers: { Accept: "application/json" } })
+    .then((response) => (response.ok ? response.json() : null))
+    .then((data) => {
+      if (!document.querySelector("a.visitor-place")) return;
+      const label = data ? placeLabel(data.address) : "";
+      setVisitorPlace(label || "Your location", href);
+    })
+    .catch(() => {
+      if (document.querySelector("a.visitor-place")) setVisitorPlace("Your location", href);
+    });
+}
+
+function placeVisitor() {
+  if (!document.querySelector("a.visitor-place") || !navigator.geolocation) return;
+  const ask = (accurate) => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      readVisitorPlace(position.coords.latitude, position.coords.longitude);
+    }, () => {
+      if (accurate) ask(false);
+    }, { enableHighAccuracy: accurate, timeout: accurate ? 12000 : 8000, maximumAge: 0 });
+  };
+  ask(true);
+}
+
 function applyPage() {
   document.querySelectorAll("[data-edit]").forEach((node) => {
     if (node.dataset.original == null) node.dataset.original = node.textContent;
@@ -756,7 +831,7 @@ function applyPage() {
   }
   const shopPlace = "Durgapura, Jaipur, Rajasthan";
   const shopMap = "https://www.google.com/maps/place/Durgapura,+Jaipur,+Rajasthan/@26.8517972,75.7862232,15z";
-  document.querySelectorAll("a.map-link").forEach((link) => {
+  document.querySelectorAll("a.map-link:not(.visitor-place)").forEach((link) => {
     const label = link.querySelector("[data-edit='city']") || link;
     let place = label.textContent.trim();
     if (place === "Durgapura, Jaipur 302018") {
