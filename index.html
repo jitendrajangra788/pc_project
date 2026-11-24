@@ -145,7 +145,7 @@
       </a>
       <nav id="siteNav" class="nav" aria-label="Primary">
         <a href="#home">Home</a>
-        <a href="#services">Services</a>
+        <a href="services/index.html">Services</a>
         <a href="#plans">AMC Plans</a>
         <a href="#about">About Us</a>
         <a href="blog/index.html">Blog</a>
@@ -311,7 +311,9 @@
           <h2 id="servicesTitle" data-edit="services.title">Our services at a glance</h2>
           <p class="lede" data-edit="services.lede">From system diagnostics to repair, SKYPC looks after computers, laptops, printers and CCTV for homes, professionals and small businesses in Jaipur.</p>
         </div>
-        <div class="services-grid" id="serviceGrid">
+        <div class="service-rail">
+          <button class="rail-btn rail-prev" type="button" aria-label="Previous services"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <div class="services-grid" id="serviceGrid">
           <article class="svc">
             <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-desktop"/></svg></span>
             <h3>Computer Services</h3>
@@ -360,7 +362,10 @@
             <p>Regular maintenance, repair and support through the year.</p>
             <button class="linkish" type="button" data-service="AMC Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
+          </div>
+          <button class="rail-btn rail-next" type="button" aria-label="Next services"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
+        <p class="blog-more"><a class="btn btn-ghost" href="services/index.html">All services</a></p>
       </div>
     </section>
 
@@ -660,7 +665,7 @@
         <h3>Quick links</h3>
         <ul>
           <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="services/index.html">Services</a></li>
           <li><a href="#plans">AMC plans</a></li>
           <li><a href="#about">About us</a></li>
           <li><a href="blog/index.html">Blog</a></li>

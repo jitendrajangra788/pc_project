@@ -2,6 +2,7 @@ export default function sitemap() {
   const lastModified = "2026-11-24";
   return [
     { url: "https://skypc.in/", lastModified },
+    { url: "https://skypc.in/services", lastModified },
     { url: "https://skypc.in/blog", lastModified },
     { url: "https://skypc.in/blog/laptop-repair-jaipur", lastModified },
     { url: "https://skypc.in/blog/cctv-installation-jaipur", lastModified },

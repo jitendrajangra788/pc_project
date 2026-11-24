@@ -219,7 +219,13 @@ nav.addEventListener("click", (event) => {
     if (closer) closer.closest("dialog").close();
 
     const serviceBtn = event.target.closest("[data-service]");
-    if (serviceBtn && serviceDialog) openService(serviceBtn.dataset.service);
+    const serviceCard = serviceBtn ? null : event.target.closest(".svc");
+    const serviceName = serviceBtn
+      ? serviceBtn.dataset.service
+      : serviceCard && serviceCard.querySelector("[data-service]")
+        ? serviceCard.querySelector("[data-service]").dataset.service
+        : "";
+    if (serviceName && serviceDialog) openService(serviceName);
 
     const planBtn = event.target.closest("[data-plan]");
     if (planBtn && bookForm) selectPlan(planBtn.dataset.plan);
@@ -333,12 +339,22 @@ document.getElementById("mobile").addEventListener("input", (event) => {
   });
 });
 
-document.getElementById("dialogBook").addEventListener("click", () => {
-  serviceSelect.value = dialogTitle.textContent;
-  serviceSelect.dispatchEvent(new Event("change"));
-  serviceDialog.close();
-  document.getElementById("custName").focus();
-});
+}
+
+const dialogBook = document.getElementById("dialogBook");
+if (dialogBook) {
+  dialogBook.addEventListener("click", () => {
+    const name = dialogTitle ? dialogTitle.textContent : "";
+    if (bookForm && serviceSelect) {
+      serviceSelect.value = name;
+      serviceSelect.dispatchEvent(new Event("change"));
+      if (serviceDialog) serviceDialog.close();
+      const nameField = document.getElementById("custName");
+      if (nameField) nameField.focus();
+      return;
+    }
+    location.href = "/?service=" + encodeURIComponent(name) + "#booking";
+  });
 }
 
 const moreWork = document.getElementById("moreWork");
@@ -417,6 +433,15 @@ navLinks.forEach((link) => {
 
   trackView();
   applyDesk();
+  bindServiceRail();
+  const requestedService = new URLSearchParams(location.search).get("service");
+  if (requestedService && serviceSelect) {
+    const match = Array.prototype.find.call(serviceSelect.options, (option) => option.value === requestedService);
+    if (match) {
+      serviceSelect.value = requestedService;
+      serviceSelect.dispatchEvent(new Event("change"));
+    }
+  }
   placeVisitor();
   window.addEventListener("storage", applyDesk);
   return function () {
@@ -430,6 +455,7 @@ navLinks.forEach((link) => {
     if (bookBarObserver) bookBarObserver.disconnect();
     bookBar.remove();
     document.body.classList.remove("has-book-bar");
+    stopServiceRail();
   };
 }
 
@@ -590,6 +616,82 @@ function serviceIcon(title, index) {
   return fallback[index % fallback.length];
 }
 
+let serviceMotion = 0;
+let serviceDir = 1;
+let serviceHold = false;
+let serviceHoldTimer = 0;
+
+function stopServiceRail() {
+  if (serviceMotion) cancelAnimationFrame(serviceMotion);
+  serviceMotion = 0;
+  if (serviceHoldTimer) clearTimeout(serviceHoldTimer);
+  serviceHoldTimer = 0;
+}
+
+function holdServiceRail(ms) {
+  serviceHold = true;
+  if (serviceHoldTimer) clearTimeout(serviceHoldTimer);
+  serviceHoldTimer = setTimeout(() => {
+    serviceHold = false;
+    serviceHoldTimer = 0;
+  }, ms);
+}
+
+function startServiceRail() {
+  const grid = document.getElementById("serviceGrid");
+  if (!grid || !document.querySelector(".service-rail") || serviceMotion) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const tick = () => {
+    if (!grid.isConnected) {
+      stopServiceRail();
+      return;
+    }
+    const max = grid.scrollWidth - grid.clientWidth;
+    if (max > 12 && !serviceHold) {
+      const next = grid.scrollLeft + serviceDir * 0.7;
+      if (next >= max) {
+        grid.scrollLeft = max;
+        serviceDir = -1;
+      } else if (next <= 0) {
+        grid.scrollLeft = 0;
+        serviceDir = 1;
+      } else {
+        grid.scrollLeft = next;
+      }
+    }
+    serviceMotion = requestAnimationFrame(tick);
+  };
+  serviceMotion = requestAnimationFrame(tick);
+}
+
+function moveServiceRail(direction) {
+  const grid = document.getElementById("serviceGrid");
+  if (!grid) return;
+  const card = grid.querySelector(".svc");
+  const gap = 14;
+  const amount = card ? card.getBoundingClientRect().width + gap : 224;
+  serviceDir = direction < 0 ? -1 : 1;
+  holdServiceRail(900);
+  const max = Math.max(0, grid.scrollWidth - grid.clientWidth);
+  grid.scrollLeft = Math.min(max, Math.max(0, grid.scrollLeft + serviceDir * amount));
+}
+
+function bindServiceRail() {
+  const rail = document.querySelector(".service-rail");
+  if (!rail) return;
+  if (rail.dataset.bound !== "1") {
+    rail.dataset.bound = "1";
+    rail.addEventListener("pointerenter", () => { serviceHold = true; });
+    rail.addEventListener("pointerleave", () => { serviceHold = false; });
+    rail.addEventListener("pointerdown", () => holdServiceRail(1200));
+    const prev = rail.querySelector(".rail-prev");
+    const next = rail.querySelector(".rail-next");
+    if (prev) prev.addEventListener("click", () => moveServiceRail(-1));
+    if (next) next.addEventListener("click", () => moveServiceRail(1));
+  }
+  startServiceRail();
+}
+
 function renderServices(items) {
   const grid = document.getElementById("serviceGrid");
   const footer = document.getElementById("footerServices");
@@ -614,6 +716,7 @@ function renderServices(items) {
       article.append(icon, heading, text, button);
       grid.append(article);
     });
+    startServiceRail();
   }
   if (footer) {
     footer.replaceChildren();
