@@ -100,7 +100,7 @@ const pageFields = [
   ["Contact", "phone", "Phone", "+91 90246 83436"],
   ["Contact", "email", "Email", "support@skypc.in"],
   ["Contact", "hours", "Hours", "On-site and remote support"],
-  ["Contact", "city", "City", "Durgapura, Jaipur 302018"],
+  ["Contact", "city", "City", "Durgapura, Jaipur, Rajasthan"],
   ["Contact", "tagline", "Tagline", "Smart service. Reliable support."],
   ["Contact", "blurb", "Footer line", "Smart Service. Reliable Support. SKYPC ensures your systems stay strong."],
   ["Hero", "hero.kicker", "Small label", "Durgapura, Jaipur"],

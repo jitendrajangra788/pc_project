@@ -754,6 +754,20 @@ function applyPage() {
       link.href = "mailto:" + email;
     });
   }
+  const shopPlace = "Durgapura, Jaipur, Rajasthan";
+  const shopMap = "https://www.google.com/maps/place/Durgapura,+Jaipur,+Rajasthan/@26.8517972,75.7862232,15z";
+  document.querySelectorAll("a.map-link").forEach((link) => {
+    const label = link.querySelector("[data-edit='city']") || link;
+    let place = label.textContent.trim();
+    if (place === "Durgapura, Jaipur 302018") {
+      place = shopPlace;
+      label.textContent = shopPlace;
+    }
+    if (!place) return;
+    link.href = place === shopPlace
+      ? shopMap
+      : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place);
+  });
   document.querySelectorAll("[data-plan-key]").forEach((button) => {
     const name = document.querySelector('[data-edit="' + button.dataset.planKey + '"]');
     if (name && name.textContent.trim()) button.dataset.plan = name.textContent.trim();
