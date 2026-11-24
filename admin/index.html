@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SKYPC desk</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b2144">
+  <link rel="icon" href="../images/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/admin.css?v=11">
+</head>
+<body>
+  <div class="desk">
+    <aside class="desk-side">
+      <a class="logo" href="../index.html">
+        <img class="logo-mark" src="../images/logo.jpg" width="80" height="80" alt="">
+        <span><strong>SKYPC</strong><small>Desk</small></span>
+      </a>
+      <nav class="desk-nav" aria-label="Desk">
+        <button type="button" data-view="aaj" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="4" rx="1.5"/><rect x="13" y="10" width="7" height="10" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/></svg><span>Today</span></button>
+        <button type="button" data-view="bookings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8M8 8h8M6 4.5h12v15H6z"/><path d="M9 13h6M9 16h4"/></svg><span>Bookings</span><b class="nav-count" id="bookCount" hidden>0</b></button>
+        <button type="button" data-view="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l4 4v12H5z"/><path d="M15 4v4h4M8 12h8M8 16h5"/></svg><span>Page</span></button>
+        <button type="button" data-view="faq"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.2 2.4c-.7.3-1.2.9-1.2 1.6V14"/><path d="M12 17h.01"/></svg><span>Questions</span></button>
+        <button type="button" data-view="site"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.4"/><path d="M8 16l3-3 2 2 3-4 3 5"/></svg><span>Site</span></button>
+      </nav>
+      <p class="side-note">Bookings, questions and photos stay on this computer. Visits from other phones do not show up here.</p>
+    </aside>
+    <main class="desk-main">
+      <header class="desk-top">
+        <div>
+          <p class="kicker">Admin</p>
+          <h1 id="deskTitle">Today</h1>
+          <p id="deskLead">Visits, WhatsApp taps, calls and new bookings on this computer.</p>
+        </div>
+        <div class="desk-actions">
+          <a class="btn btn-primary" href="../index.html">Open site</a>
+        </div>
+      </header>
+
+      <section class="panel" id="view-aaj" data-panel="aaj">
+        <div class="desk-stats" id="statGrid" aria-label="Today’s totals"></div>
+        <div class="split">
+          <article class="card">
+            <h2>Last 7 days</h2>
+            <div class="bars" id="weekBars"></div>
+            <p class="hint" id="weekNote"></p>
+          </article>
+          <article class="card">
+            <div class="card-head">
+              <h2>New bookings</h2>
+              <button class="text-btn" id="openBookings" type="button">See all</button>
+            </div>
+            <ul class="activity" id="bookPreview"></ul>
+          </article>
+        </div>
+        <article class="card stack-card">
+          <div class="card-head">
+            <h2>Latest activity</h2>
+            <button class="text-btn" id="clearStats" type="button">Clear counts</button>
+          </div>
+          <ul class="activity" id="activity"></ul>
+        </article>
+      </section>
+
+      <section class="panel" id="view-bookings" data-panel="bookings" hidden>
+        <article class="card">
+          <h2>From the homepage form</h2>
+          <p class="hint">Name, phone, area and service. Mark done when the visit is handled. This list stays on this computer.</p>
+          <div id="bookList" class="book-list"></div>
+        </article>
+      </section>
+
+      <section class="panel" id="view-page" data-panel="page" hidden>
+        <div class="card-head page-tools">
+          <p class="hint">Type to update. Use Add and Delete for your own services, plans, steps and reviews. Saved on this computer.</p>
+          <button class="text-btn" id="resetPage" type="button">Restore original text</button>
+        </div>
+        <div id="pageEditor" class="stack"></div>
+        <div id="pageLists" class="stack"></div>
+        <p class="hint" id="pageNote">Saves as you type.</p>
+      </section>
+
+      <section class="panel" id="view-faq" data-panel="faq" hidden>
+        <article class="card">
+          <div class="card-head">
+            <h2>Questions on the homepage</h2>
+            <button class="btn btn-ghost" id="addFaq" type="button">Add question</button>
+          </div>
+          <div id="faqEditor" class="stack"></div>
+          <p class="hint" id="faqNote">Saves as you type.</p>
+        </article>
+      </section>
+
+      <section class="panel" id="view-site" data-panel="site" hidden>
+        <div class="desk-layout">
+          <div id="postList" class="post-table" role="list"></div>
+          <aside class="photo-pane" id="photoPane">
+            <h2>Guide photo</h2>
+            <div class="cover"><img id="coverImg" alt=""></div>
+            <p class="file" id="coverFile"></p>
+            <label>Change photo<input id="coverPick" type="file" accept="image/*"></label>
+            <p class="hint" id="coverHint">A new photo saves on this computer and shows on the blog.</p>
+            <div class="row-actions">
+              <a class="text-btn" id="openPost" href="../blog/index.html">Open guide</a>
+              <button class="text-btn" id="copyGuide" type="button">Copy for WhatsApp</button>
+            </div>
+            <textarea id="shareOut" class="share-out" rows="3" readonly hidden></textarea>
+          </aside>
+        </div>
+        <article class="card stack-card">
+          <h2>Google and WhatsApp</h2>
+          <label class="field">Google title<input id="marketTitle" type="text" maxlength="80"></label>
+          <label class="field">Google description<textarea id="marketDescription" rows="3" maxlength="180"></textarea></label>
+          <label class="field">First WhatsApp message<textarea id="marketWhatsapp" rows="2" maxlength="180"></textarea></label>
+          <div class="row-actions">
+            <button class="text-btn" id="resetMarket" type="button">Restore original text</button>
+            <p class="hint" id="marketNote">Saves as you type.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="desk.js?v=13"></script>
+</body>
+</html>

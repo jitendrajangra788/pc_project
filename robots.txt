@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://skypc.in/sitemap.xml
