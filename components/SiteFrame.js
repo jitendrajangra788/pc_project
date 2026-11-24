@@ -8,6 +8,9 @@ export default function SiteFrame({ html, kind }) {
   useEffect(() => {
     const node = ref.current;
     if (!node) return undefined;
+
+    node.innerHTML = html || "";
+
     let stop = function () {};
     let cancel = false;
     const load = kind === "desk"
@@ -17,11 +20,13 @@ export default function SiteFrame({ html, kind }) {
       if (cancel) return;
       stop = (kind === "desk" ? mod.bootDesk() : mod.bootSite()) || function () {};
     });
+
     return () => {
       cancel = true;
       stop();
+      if (ref.current) ref.current.innerHTML = "";
     };
   }, [kind, html]);
 
-  return <div ref={ref} dangerouslySetInnerHTML={{ __html: html }} />;
+  return <div ref={ref} suppressHydrationWarning />;
 }

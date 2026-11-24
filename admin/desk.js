@@ -90,7 +90,7 @@ const actionNames = {
 
 const copy = {
   aaj: ["Today", "Visits, WhatsApp taps, calls and new bookings on this computer."],
-  bookings: ["Bookings", "Name, phone, area, service and what's wrong from the homepage form."],
+  bookings: ["Bookings", "Name, phone, area, service and what's wrong from the /book form."],
   page: ["Page", "Change the public homepage from here. It saves on this computer and shows when the site opens here."],
   faq: ["Questions", "These questions appear on the homepage. They save as you type."],
   site: ["Site", "Guide photos, the Google title, and the first WhatsApp message."]

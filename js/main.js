@@ -162,13 +162,18 @@ function openService(name) {
 }
 
 function selectPlan(name) {
+  if (!bookForm || !serviceSelect || !planInput) {
+    location.href = "/book?plan=" + encodeURIComponent(name);
+    return;
+  }
   planInput.value = name;
   planChip.hidden = false;
   planChipText.textContent = name + " selected";
   const amcOption = Array.prototype.find.call(serviceSelect.options, (option) => /amc/i.test(option.value));
   serviceSelect.value = amcOption ? amcOption.value : serviceSelect.options[0].value;
   deviceSelect.value = "Multiple devices";
-  document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+  const booking = document.getElementById("booking");
+  if (booking) booking.scrollIntoView({ behavior: "smooth" });
 }
 
 export function bootSite() {
@@ -353,7 +358,7 @@ if (dialogBook) {
       if (nameField) nameField.focus();
       return;
     }
-    location.href = "/?service=" + encodeURIComponent(name) + "#booking";
+    location.href = "/book?service=" + encodeURIComponent(name);
   });
 }
 
@@ -417,12 +422,13 @@ navLinks.forEach((link) => {
   const bookBar = document.createElement("a");
   bookBar.className = "book-bar";
   bookBar.textContent = "Book now";
-  bookBar.href = document.getElementById("booking") ? "#booking" : "/#booking";
+  const onBookPage = /\/book\/?$/.test(location.pathname);
+  bookBar.href = onBookPage ? "#booking" : "/book";
   document.body.appendChild(bookBar);
   document.body.classList.add("has-book-bar");
   const bookingSection = document.getElementById("booking");
   let bookBarObserver;
-  if (bookingSection) {
+  if (onBookPage && bookingSection) {
     bookBarObserver = new IntersectionObserver((entries) => {
       const seen = entries.some((entry) => entry.isIntersecting);
       bookBar.hidden = seen;
@@ -434,7 +440,9 @@ navLinks.forEach((link) => {
   trackView();
   applyDesk();
   bindServiceRail();
-  const requestedService = new URLSearchParams(location.search).get("service");
+  const params = new URLSearchParams(location.search);
+  const requestedService = params.get("service");
+  const requestedPlan = params.get("plan");
   if (requestedService && serviceSelect) {
     const match = Array.prototype.find.call(serviceSelect.options, (option) => option.value === requestedService);
     if (match) {
@@ -442,6 +450,7 @@ navLinks.forEach((link) => {
       serviceSelect.dispatchEvent(new Event("change"));
     }
   }
+  if (requestedPlan && bookForm) selectPlan(requestedPlan);
   placeVisitor();
   window.addEventListener("storage", applyDesk);
   return function () {

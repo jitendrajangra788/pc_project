@@ -123,6 +123,9 @@
     <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
     <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5 19.2c1.4-3 12.6-3 14 0"/></symbol>
     <symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3 2.7-2.7z"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="m10 9 5 3-5 3V9z"/></symbol>
   </svg>
 
   <a class="skip" href="#main">Skip to content</a>
@@ -137,7 +140,7 @@
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="logo" href="#home">
-        <img class="logo-mark" src="images/logo.jpg" width="80" height="80" alt="">
+        <img class="logo-mark" src="images/logo.jpg" width="80" height="80" alt="SKYPC">
         <span>
           <strong>SKYPC</strong>
           <small data-edit="tagline">Smart service. Reliable support.</small>
@@ -147,9 +150,9 @@
         <a href="#home">Home</a>
         <a href="services/index.html">Services</a>
         <a href="#plans">AMC Plans</a>
-        <a href="#about">About Us</a>
+        <a href="about/index.html">About Us</a>
         <a href="blog/index.html">Blog</a>
-        <a href="#contact">Contact</a>
+        <a href="contact/index.html">Contact</a>
       </nav>
       <div class="header-actions">
         <a class="btn btn-ghost phone-btn" href="tel:+919024683436">
@@ -183,7 +186,7 @@
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> <span>Annual maintenance (AMC)</span></li>
           </ul>
           <div class="hero-actions">
-            <a class="btn btn-white" href="#booking">Book a service</a>
+            <a class="btn btn-white" href="book/index.html">Book a service</a>
             <a class="btn btn-green" href="https://wa.me/919024683436" target="_blank" rel="noopener">
               <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
               WhatsApp now
@@ -222,94 +225,15 @@
       </div>
     </section>
 
-    <div class="booking-wrap" id="booking">
-      <div class="wrap">
-        <section class="booking" aria-labelledby="bookTitle">
-          <div class="booking-intro">
-            <p class="kicker" data-edit="book.kicker">Book a visit</p>
-            <h2 id="bookTitle" data-edit="book.title">Book a doorstep visit in Jaipur</h2>
-            <p class="muted" data-edit="book.line">Get quick service at your doorstep.</p>
-            <ul class="trust-list">
-              <li><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg> Experienced technicians</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Quick service</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Transparent pricing</li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Reliable support</li>
-            </ul>
-          </div>
-          <form id="bookForm" novalidate>
-            <div class="plan-chip" id="planChip" hidden>
-              <span id="planChipText"></span>
-              <button type="button" id="clearPlan" aria-label="Clear selected plan">×</button>
-            </div>
-            <input type="hidden" id="planInput" value="">
-            <div class="form-grid" id="formGrid">
-              <label class="field">
-                <span>Service</span>
-                <select id="service" name="service">
-                  <option>Computer Services</option>
-                  <option>Laptop Services</option>
-                  <option>Apple Services</option>
-                  <option>Printer Services</option>
-                  <option>CCTV Services</option>
-                  <option>Data Recovery Services</option>
-                  <option>Wifi Services</option>
-                  <option>AMC Services</option>
-                </select>
-              </label>
-              <label class="field">
-                <span>Device</span>
-                <select id="device" name="device">
-                  <option>Laptop</option>
-                  <option>Desktop</option>
-                  <option>Printer</option>
-                  <option>CCTV</option>
-                  <option>Router / Network</option>
-                  <option>Multiple devices</option>
-                  <option>Other</option>
-                </select>
-              </label>
-              <label class="field">
-                <span>Your name</span>
-                <input id="custName" name="name" autocomplete="name" maxlength="60" required>
-                <small class="err" hidden>Please enter your name.</small>
-              </label>
-              <label class="field">
-                <span>Mobile number</span>
-                <input id="mobile" name="mobile" inputmode="numeric" autocomplete="tel" maxlength="10" placeholder="10-digit mobile" required>
-                <small class="err" hidden>Enter a 10-digit mobile number.</small>
-              </label>
-              <label class="field">
-                <span>Location</span>
-                <input id="area" name="area" autocomplete="address-level3" maxlength="120" placeholder="Your area fills in, or type it" required>
-                <small class="err" hidden>Tell us the area in Jaipur.</small>
-              </label>
-              <label class="field">
-                <span>What's wrong</span>
-                <textarea id="issue" name="issue" maxlength="300" rows="3" placeholder="Screen cracked, battery dead, PC won't start" required></textarea>
-                <small class="err" hidden>Tell us what's wrong in a few words.</small>
-              </label>
-              <p class="form-note">We confirm the visit on WhatsApp or a phone call. You pay after the service.</p>
-              <button class="btn btn-primary" type="submit">Book now</button>
-            </div>
-            <div class="form-success" id="formSuccess" hidden role="status">
-              <strong>Your booking is ready.</strong>
-              <p class="muted">Send it on WhatsApp and the team will confirm the visit.</p>
-              <div class="row">
-                <a class="btn btn-green" id="waGo" href="https://wa.me/919024683436" target="_blank" rel="noopener">Open WhatsApp</a>
-                <button class="btn btn-ghost" id="editForm" type="button">Edit details</button>
-              </div>
-            </div>
-          </form>
-        </section>
-      </div>
-    </div>
-
     <section class="band" id="services" aria-labelledby="servicesTitle">
       <div class="wrap">
-        <div class="section-head">
-          <p class="kicker" data-edit="services.kicker">Services</p>
-          <h2 id="servicesTitle" data-edit="services.title">Our services at a glance</h2>
-          <p class="lede" data-edit="services.lede">From system diagnostics to repair, SKYPC looks after computers, laptops, printers and CCTV for homes, professionals and small businesses in Jaipur.</p>
+        <div class="section-head has-see-all">
+          <div class="section-head-main">
+            <p class="kicker" data-edit="services.kicker">Services</p>
+            <h2 id="servicesTitle" data-edit="services.title">Our services at a glance</h2>
+            <p class="lede" data-edit="services.lede">From system diagnostics to repair, SKYPC looks after computers, laptops, printers and CCTV for homes, professionals and small businesses in Jaipur.</p>
+          </div>
+          <a class="btn btn-ghost see-all" href="services/index.html">See All</a>
         </div>
         <div class="service-rail">
           <button class="rail-btn rail-prev" type="button" aria-label="Previous services"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -365,7 +289,6 @@
           </div>
           <button class="rail-btn rail-next" type="button" aria-label="Next services"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
-        <p class="blog-more"><a class="btn btn-ghost" href="services/index.html">All services</a></p>
       </div>
     </section>
 
@@ -375,7 +298,7 @@
           <p class="kicker">About SKYPC</p>
           <h2 id="bizTitle">Complete computer services</h2>
           <p class="lede">We're your go-to experts for seamless system setup, software support, upgrades, and everyday tech needs. Whether at home or office, our team ensures your devices work the way you want.</p>
-          <a class="btn btn-white" href="#about">Why we are best</a>
+          <a class="btn btn-white" href="about/index.html">About SKYPC</a>
         </div>
         <ul class="biz-list">
           <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Personalized consultation</li>
@@ -426,6 +349,7 @@
           <p class="kicker">Why SKYPC</p>
           <h2 id="aboutTitle" data-edit="why.title">Why we are best</h2>
           <p class="muted" data-edit="why.lead">From first-time users to repeat clients, our commitment to quality and care earns us their trust and referrals.</p>
+          <a class="btn btn-ghost see-all about-link" href="about/index.html">About Us</a>
         </div>
         <div class="partner-badge">
           <div>
@@ -479,19 +403,28 @@
     <section class="band" id="stories" aria-labelledby="storyTitle">
       <div class="wrap story-grid">
         <div id="reviewStack">
-        <figure class="quote-card">
-          <blockquote>
-            <p>Smart Service. Reliable Support. SKYPC ensures your systems stay strong.</p>
-          </blockquote>
-          <figcaption>
-            <span class="avatar" aria-hidden="true">SK</span>
-            <span><strong>SKYPC</strong><small>Durgapura, Jaipur</small></span>
-          </figcaption>
-        </figure>
+          <figure class="quote-card">
+            <p class="quote-kicker">Trusted in Jaipur</p>
+            <blockquote>
+              <p>Smart Service. Reliable Support. SKYPC ensures your systems stay strong.</p>
+            </blockquote>
+            <ul class="quote-tags">
+              <li>Doorstep visits</li>
+              <li>Pay after service</li>
+              <li>Clear pricing</li>
+            </ul>
+            <figcaption>
+              <img class="avatar-logo" src="images/logo.jpg" width="80" height="80" alt="">
+              <span><strong>SKYPC</strong><small>Durgapura, Jaipur</small></span>
+            </figcaption>
+          </figure>
         </div>
-        <div>
+        <div class="story-work">
           <div class="gallery-head">
-            <h2 id="storyTitle">Repair and install work in Jaipur</h2>
+            <div>
+              <p class="kicker">Work we do</p>
+              <h2 id="storyTitle">Repair and install work in Jaipur</h2>
+            </div>
             <button class="btn btn-ghost" id="moreWork" type="button">View more</button>
           </div>
           <div class="gallery">
@@ -526,10 +459,13 @@
 
     <section class="section" id="guides" aria-labelledby="guidesTitle">
       <div class="wrap">
-        <div class="section-head">
-          <p class="kicker">Blog</p>
-          <h2 id="guidesTitle">Guides for laptop, CCTV and Wi-Fi problems</h2>
-          <p class="lede">Short notes from doorstep visits in Jaipur, so you know what is failing before a technician arrives.</p>
+        <div class="section-head has-see-all">
+          <div class="section-head-main">
+            <p class="kicker">Blog</p>
+            <h2 id="guidesTitle">Guides for laptop, CCTV and Wi-Fi problems</h2>
+            <p class="lede">Short notes from doorstep visits in Jaipur, so you know what is failing before a technician arrives.</p>
+          </div>
+          <a class="btn btn-ghost see-all" href="blog/index.html">See All</a>
         </div>
         <div class="blog-grid">
           <a class="blog-card" href="blog/laptop-repair-jaipur.html">
@@ -577,7 +513,6 @@
             </div>
           </a>
         </div>
-        <p class="blog-more"><a class="btn btn-ghost" href="blog/index.html">All guides</a></p>
       </div>
     </section>
 
@@ -647,7 +582,7 @@
     <div class="wrap footer-grid">
       <div>
         <a class="logo" href="#home">
-          <img class="logo-mark" src="images/logo.jpg" width="80" height="80" alt="">
+          <img class="logo-mark" src="images/logo.jpg" width="80" height="80" alt="SKYPC">
           <span>
             <strong>SKYPC</strong>
             <small data-edit="tagline">Smart service. Reliable support.</small>
@@ -655,10 +590,10 @@
         </a>
         <p class="blurb" data-edit="blurb">Smart Service. Reliable Support. SKYPC ensures your systems stay strong.</p>
         <ul class="social">
-          <li><a href="https://www.facebook.com/skypc365/" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://www.instagram.com/skypc365" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://www.youtube.com/@skypc365" target="_blank" rel="noopener">YouTube</a></li>
-          <li><a href="https://wa.me/919024683436" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a class="social-btn" href="https://www.facebook.com/skypc365/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" aria-hidden="true"><use href="#i-fb"/></svg></a></li>
+          <li><a class="social-btn" href="https://www.instagram.com/skypc365" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" aria-hidden="true"><use href="#i-ig"/></svg></a></li>
+          <li><a class="social-btn" href="https://www.youtube.com/@skypc365" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" aria-hidden="true"><use href="#i-yt"/></svg></a></li>
+          <li><a class="social-btn" href="https://wa.me/919024683436" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg></a></li>
         </ul>
       </div>
       <div>
@@ -667,10 +602,10 @@
           <li><a href="#home">Home</a></li>
           <li><a href="services/index.html">Services</a></li>
           <li><a href="#plans">AMC plans</a></li>
-          <li><a href="#about">About us</a></li>
+          <li><a href="about/index.html">About us</a></li>
           <li><a href="blog/index.html">Blog</a></li>
           <li><a href="admin/index.html">Admin</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="contact/index.html">Contact</a></li>
         </ul>
       </div>
       <div>
