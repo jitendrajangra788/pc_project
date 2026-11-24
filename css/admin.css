@@ -316,8 +316,8 @@
 .meter-row { display: grid; gap: 4px; }
 .meter-row p { display: flex; justify-content: space-between; gap: 12px; margin: 0; font-size: 14px; font-weight: 700; }
 .meter-row p span { color: var(--muted); font-weight: 800; }
-.track { height: 8px; overflow: hidden; border-radius: 999px; background: #e7eef8; }
-.track i { display: block; height: 100%; border-radius: inherit; background: var(--blue); }
+.desk .track { height: 8px; overflow: hidden; border-radius: 999px; background: #e7eef8; }
+.desk .track i { display: block; height: 100%; border-radius: inherit; background: var(--blue); }
 
 .activity { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .activity li { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-size: 14px; }
