@@ -266,17 +266,20 @@ bookForm.addEventListener("submit", (event) => {
   const name = document.getElementById("custName");
   const mobile = document.getElementById("mobile");
   const area = document.getElementById("area");
+  const issue = document.getElementById("issue");
   const nameValue = name.value.trim();
   const mobileValue = mobile.value.replace(/\D/g, "");
   const areaValue = area.value.trim();
+  const issueValue = issue.value.trim();
 
   setError(name, nameValue.length < 2 ? "Please enter your name." : "");
   setError(mobile, /^[6-9]\d{9}$/.test(mobileValue) ? "" : "Enter a 10-digit mobile number.");
   setError(area, areaValue.length < 2 ? "Tell us the area in Jaipur." : "");
+  setError(issue, issueValue.length < 3 ? "Tell us what's wrong in a few words." : "");
 
   const invalid = bookForm.querySelector(".is-invalid");
   if (invalid) {
-    invalid.querySelector("input, select").focus();
+    invalid.querySelector("input, select, textarea").focus();
     return;
   }
 
@@ -287,7 +290,8 @@ bookForm.addEventListener("submit", (event) => {
     "Mobile: " + mobileValue,
     "Service: " + serviceSelect.value,
     "Device: " + deviceSelect.value,
-    "Location: " + areaValue
+    "Location: " + areaValue,
+    "What's wrong: " + issueValue
   ];
   if (planInput.value) lines.push("Plan: " + planInput.value);
 
@@ -303,6 +307,7 @@ bookForm.addEventListener("submit", (event) => {
     service: serviceSelect.value,
     device: deviceSelect.value,
     area: areaValue,
+    issue: issueValue,
     plan: planInput.value || "",
     status: "new",
     t: Date.now()
@@ -321,8 +326,11 @@ document.getElementById("mobile").addEventListener("input", (event) => {
   setError(event.target, "");
 });
 
-["custName", "area"].forEach((id) => {
-  document.getElementById(id).addEventListener("input", (event) => setError(event.target, ""));
+["custName", "area", "issue"].forEach((id) => {
+  document.getElementById(id).addEventListener("input", (event) => {
+    if (id === "area") event.target.dataset.manual = "1";
+    setError(event.target, "");
+  });
 });
 
 document.getElementById("dialogBook").addEventListener("click", () => {
@@ -780,6 +788,9 @@ function setVisitorPlace(label, href) {
     if (href) link.href = href;
     link.title = label;
   });
+  const area = document.getElementById("area");
+  if (!area || !label || label === "Your location" || area.dataset.manual === "1") return;
+  area.value = label.slice(0, area.maxLength || 120);
 }
 
 function readVisitorPlace(lat, lng) {

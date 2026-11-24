@@ -280,8 +280,13 @@
               </label>
               <label class="field">
                 <span>Location</span>
-                <input id="area" name="area" autocomplete="address-level3" maxlength="80" placeholder="Area in Jaipur" required>
+                <input id="area" name="area" autocomplete="address-level3" maxlength="120" placeholder="Your area fills in, or type it" required>
                 <small class="err" hidden>Tell us the area in Jaipur.</small>
+              </label>
+              <label class="field">
+                <span>What's wrong</span>
+                <textarea id="issue" name="issue" maxlength="300" rows="3" placeholder="Screen cracked, battery dead, PC won't start" required></textarea>
+                <small class="err" hidden>Tell us what's wrong in a few words.</small>
               </label>
               <p class="form-note">We confirm the visit on WhatsApp or a phone call. You pay after the service.</p>
               <button class="btn btn-primary" type="submit">Book now</button>

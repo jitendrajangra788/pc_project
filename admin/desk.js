@@ -90,7 +90,7 @@ const actionNames = {
 
 const copy = {
   aaj: ["Today", "Visits, WhatsApp taps, calls and new bookings on this computer."],
-  bookings: ["Bookings", "Name, phone, area and service from the homepage form."],
+  bookings: ["Bookings", "Name, phone, area, service and what's wrong from the homepage form."],
   page: ["Page", "Change the public homepage from here. It saves on this computer and shows when the site opens here."],
   faq: ["Questions", "These questions appear on the homepage. They save as you type."],
   site: ["Site", "Guide photos, the Google title, and the first WhatsApp message."]
@@ -374,6 +374,12 @@ function paintBookings() {
     const when = document.createElement("p");
     when.className = "meta";
     when.textContent = bookingTime(row) + (row.device ? " · " + row.device : "");
+    let problem;
+    if (row.issue) {
+      problem = document.createElement("p");
+      problem.className = "meta";
+      problem.textContent = row.issue;
+    }
     const actions = document.createElement("div");
     actions.className = "book-actions";
     const doneBtn = document.createElement("button");
@@ -387,7 +393,9 @@ function paintBookings() {
     remove.textContent = "Remove";
     remove.addEventListener("click", () => removeBooking(row.id));
     actions.append(doneBtn, remove);
-    card.append(top, meta, phone, when, actions);
+    card.append(top, meta, phone, when);
+    if (problem) card.append(problem);
+    card.append(actions);
     list.append(card);
   });
 }
