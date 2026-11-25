@@ -46,7 +46,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Manrope:wght@500;600;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=19">
+  <link rel="stylesheet" href="css/styles.css?v=28">
 </head>
 <body>
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -95,14 +95,6 @@
         <a href="contact/index.html">Contact</a>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-ghost phone-btn" href="tel:+919024683436" aria-label="Call SKYPC">
-          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
-          <span data-edit="phone">+91 90246 83436</span>
-        </a>
-        <a class="btn btn-green wa-btn" href="https://wa.me/919024683436" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
-          <span>WhatsApp</span>
-        </a>
         <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="siteNav">
           <svg class="icon icon-menu" aria-hidden="true"><use href="#i-menu"/></svg>
           <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
@@ -120,55 +112,69 @@
         <span class="orb orb-c"></span>
       </div>
       <div class="wrap hero-grid">
-        <div class="hero-copy glass-panel">
-          <p class="kicker glass-badge" data-edit="hero.kicker">Durgapura, Jaipur</p>
-          <h1><span data-edit="hero.title">On-site laptop and computer repair in Jaipur</span> <em data-edit="hero.accent">at your door.</em></h1>
-          <p class="lead" data-edit="hero.lead">We're your go-to experts for system setup, software support, upgrades, and everyday tech needs at home or in the office.</p>
-          <ul class="checks" id="heroChecks">
-            <li><span class="check-ico" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span> <span>Computer and laptop service</span></li>
-            <li><span class="check-ico" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span> <span>Apple, printer and CCTV</span></li>
-            <li><span class="check-ico" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span> <span>Data recovery and Wi-Fi</span></li>
-            <li><span class="check-ico" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span> <span>Annual maintenance (AMC)</span></li>
-          </ul>
-          <div class="hero-actions">
-            <a class="btn btn-primary hero-cta" href="book/index.html">Book a service</a>
-            <a class="btn btn-ink hero-cta" href="https://wa.me/919024683436" target="_blank" rel="noopener">
-              <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
-              WhatsApp now
+        <div class="hero-cats">
+          <p class="hero-cats-kicker">Durgapura, Jaipur</p>
+          <h1 class="hero-cats-title">What do you need help with?</h1>
+          <div class="hero-cat-grid" aria-label="Popular services">
+            <button class="hero-cat" type="button" data-service="Apple Services">
+              <span class="hero-cat-ico" aria-hidden="true">
+                <img src="images/cat-macbook.jpg" width="160" height="160" alt="" loading="lazy">
+              </span>
+              <span class="hero-cat-label">MacBook Repair Services</span>
+            </button>
+            <button class="hero-cat" type="button" data-service="Laptop Services">
+              <span class="hero-cat-ico" aria-hidden="true">
+                <img src="images/cat-laptop.jpg" width="160" height="160" alt="" loading="lazy">
+              </span>
+              <span class="hero-cat-label">Laptop Repair</span>
+            </button>
+            <button class="hero-cat" type="button" data-service="CCTV Services">
+              <span class="hero-cat-ico" aria-hidden="true">
+                <img src="images/cat-cctv.jpg" width="160" height="160" alt="" loading="lazy">
+              </span>
+              <span class="hero-cat-label">CCTV Installation &amp; Repair</span>
+            </button>
+            <button class="hero-cat" type="button" data-service="Custom PC Build">
+              <span class="hero-cat-ico" aria-hidden="true">
+                <img src="images/cat-pc.jpg" width="160" height="160" alt="" loading="lazy">
+              </span>
+              <span class="hero-cat-label">Custom PC Build</span>
+            </button>
+            <a class="hero-cat hero-cat-all" href="services/index.html">
+              <span class="hero-cat-ico" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span>
+              <span class="hero-cat-label">View All Services</span>
             </a>
           </div>
-          <p class="hero-trust"><span>Same-day visits</span><span>Pay after service</span><span>Durgapura based</span></p>
         </div>
-        <article class="ticket" aria-label="How a doorstep visit moves">
-          <div class="ticket-sheen" aria-hidden="true"></div>
-          <div class="ticket-head">
-            <span class="live"><i class="pulse-dot" aria-hidden="true"></i> Doorstep visit</span>
-            <span class="loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Jaipur</span>
+
+        <div class="hero-slider" data-hero-slider aria-roledescription="carousel" aria-label="Offers">
+          <div class="hero-slides">
+            <article class="hero-slide is-active s1" aria-hidden="false">
+              <div class="hero-slide-copy">
+                <p class="hero-slide-kicker">Doorstep laptop repair</p>
+                <h2>Same-day visit for screen, battery and slow PCs</h2>
+                <a class="hero-slide-cta" href="book/index.html">Book now <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+              <div class="hero-slide-media" aria-hidden="true">
+                <img src="images/laptop-repair.jpg" width="640" height="480" alt="" loading="eager">
+              </div>
+            </article>
+            <article class="hero-slide s2" aria-hidden="true">
+              <div class="hero-slide-copy">
+                <p class="hero-slide-kicker">CCTV for home &amp; shop</p>
+                <h2>Clear camera install with phone viewing setup</h2>
+                <a class="hero-slide-cta" href="book/index.html">Book now <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+              <div class="hero-slide-media" aria-hidden="true">
+                <img src="images/cctv-install.jpg" width="640" height="480" alt="" loading="lazy">
+              </div>
+            </article>
           </div>
-          <div class="device-row">
-            <div class="mini-laptop" aria-hidden="true"><div class="scr"></div><div class="base"></div></div>
-            <div class="device-copy">
-              <strong>Laptop repair</strong>
-              <p>Screen, battery and performance</p>
-            </div>
-            <span class="chip">Genuine parts</span>
+          <div class="hero-slider-dots" role="tablist" aria-label="Slide controls">
+            <button type="button" class="is-active" role="tab" aria-selected="true" aria-label="Slide 1" data-slide="0"></button>
+            <button type="button" role="tab" aria-selected="false" aria-label="Slide 2" data-slide="1"></button>
           </div>
-          <ol class="track">
-            <li class="done"><span>1</span><p>Booked online or on a call</p></li>
-            <li class="done"><span>2</span><p>Technician assigned</p></li>
-            <li class="active"><span>3</span><p>Visit at your location</p></li>
-            <li><span>4</span><p>Pay after the repair</p></li>
-          </ol>
-          <div class="ticket-foot">
-            <div>
-              <strong>Pay after service</strong>
-              <p class="muted">Work is confirmed before you pay</p>
-            </div>
-            <div class="seal-mini">
-              <small>Durgapura, Jaipur</small>
-            </div>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
@@ -185,49 +191,49 @@
         <div class="service-rail">
           <div class="services-grid" id="serviceGrid">
           <article class="svc">
-            <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-desktop"/></svg></span>
+            <span class="svc-icon"><img src="images/cat-pc.jpg" width="160" height="160" alt="" loading="lazy"></span>
             <h3>Computer Services</h3>
             <p>Diagnosis, OS setup, virus cleanup, and RAM or SSD upgrades.</p>
             <button class="linkish" type="button" data-service="Computer Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
           <article class="svc">
-            <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg></span>
+            <span class="svc-icon"><img src="images/cat-laptop.jpg" width="160" height="160" alt="" loading="lazy"></span>
             <h3>Laptop Services</h3>
             <p>Laptop repair and doorstep service for homes and offices in Jaipur.</p>
             <button class="linkish" type="button" data-service="Laptop Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
           <article class="svc">
-            <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg></span>
+            <span class="svc-icon"><img src="images/cat-macbook.jpg" width="160" height="160" alt="" loading="lazy"></span>
             <h3>Apple Services</h3>
             <p>MacBook and iMac service in Jaipur. Not an Apple-authorised centre.</p>
             <button class="linkish" type="button" data-service="Apple Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
           <article class="svc">
-            <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-printer"/></svg></span>
+            <span class="svc-icon"><img src="images/cat-printer.jpg" width="160" height="160" alt="" loading="lazy"></span>
             <h3>Printer Services</h3>
             <p>Printer setup and servicing for home and office.</p>
             <button class="linkish" type="button" data-service="Printer Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
           <article class="svc">
-            <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-cctv"/></svg></span>
+            <span class="svc-icon"><img src="images/cat-cctv.jpg" width="160" height="160" alt="" loading="lazy"></span>
             <h3>CCTV Services</h3>
             <p>CCTV installation and support for homes, shops and offices.</p>
             <button class="linkish" type="button" data-service="CCTV Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
           <article class="svc">
-            <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-tool"/></svg></span>
+            <span class="svc-icon"><img src="images/cat-data.jpg" width="160" height="160" alt="" loading="lazy"></span>
             <h3>Data Recovery Services</h3>
             <p>Recovery from hard drives and SSDs, including devices that do not turn on.</p>
             <button class="linkish" type="button" data-service="Data Recovery Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
           <article class="svc">
-            <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg></span>
+            <span class="svc-icon"><img src="images/slow-wifi.jpg" width="160" height="160" alt="" loading="lazy"></span>
             <h3>Wifi Services</h3>
             <p>Router setup, weak signal, and home or office network connection.</p>
             <button class="linkish" type="button" data-service="Wifi Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
           <article class="svc">
-            <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <span class="svc-icon"><img src="images/computer-amc.jpg" width="160" height="160" alt="" loading="lazy"></span>
             <h3>AMC Services</h3>
             <p>Regular maintenance, repair and support through the year.</p>
             <button class="linkish" type="button" data-service="AMC Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -551,6 +557,6 @@
     </div>
   </dialog>
 
-  <script src="js/main.js?v=24"></script>
+  <script src="js/main.js?v=26"></script>
 </body>
 </html>

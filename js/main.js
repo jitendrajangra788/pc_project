@@ -65,6 +65,14 @@ const services = {
       "Repair and support for computers, laptops and printers",
       "The package is confirmed on a call before you subscribe"
     ]
+  },
+  "Custom PC Build": {
+    text: "Custom PC builds for gaming, office and creative work in Jaipur — parts chosen for your budget and use.",
+    points: [
+      "Build advice for gaming, office or editing PCs",
+      "Compatible parts, assembly and first setup",
+      "Doorstep delivery and install in Jaipur"
+    ]
   }
 };
 
@@ -76,7 +84,8 @@ const deviceByService = {
   "CCTV Services": "CCTV",
   "Data Recovery Services": "Other",
   "Wifi Services": "Router / Network",
-  "AMC Services": "Multiple devices"
+  "AMC Services": "Multiple devices",
+  "Custom PC Build": "Desktop"
 };
 
 const policies = {
@@ -440,6 +449,7 @@ navLinks.forEach((link) => {
   trackView();
   applyDesk();
   bindServiceRail();
+  const stopHeroSlider = initHeroSlider();
   let stopFaqsHelp = function () {};
   if (document.querySelector(".help-page")) {
     import("./faqs-help.js").then((mod) => {
@@ -471,6 +481,7 @@ navLinks.forEach((link) => {
     bookBar.remove();
     document.body.classList.remove("has-book-bar");
     stopServiceRail();
+    stopHeroSlider();
     stopFaqsHelp();
   };
 }
@@ -634,9 +645,22 @@ function serviceIcon(title, index) {
   if (name.indexOf("wifi") !== -1 || name.indexOf("wi-fi") !== -1 || name.indexOf("network") !== -1) return "#i-wifi";
   if (name.indexOf("amc") !== -1) return "#i-shield";
   if (name.indexOf("data") !== -1 || name.indexOf("recover") !== -1) return "#i-tool";
-  if (name.indexOf("computer") !== -1 || name.indexOf("desktop") !== -1) return "#i-desktop";
+  if (name.indexOf("computer") !== -1 || name.indexOf("desktop") !== -1 || name.indexOf("custom pc") !== -1) return "#i-desktop";
   const fallback = ["#i-desktop", "#i-laptop", "#i-printer", "#i-cctv", "#i-wifi", "#i-shield", "#i-tool"];
   return fallback[index % fallback.length];
+}
+
+function servicePhoto(title) {
+  const name = String(title || "").toLowerCase();
+  if (name.indexOf("apple") !== -1 || name.indexOf("mac") !== -1) return "images/cat-macbook.jpg";
+  if (name.indexOf("laptop") !== -1) return "images/cat-laptop.jpg";
+  if (name.indexOf("print") !== -1) return "images/cat-printer.jpg";
+  if (name.indexOf("cctv") !== -1 || name.indexOf("camera") !== -1) return "images/cat-cctv.jpg";
+  if (name.indexOf("wifi") !== -1 || name.indexOf("wi-fi") !== -1 || name.indexOf("network") !== -1) return "images/slow-wifi.jpg";
+  if (name.indexOf("amc") !== -1) return "images/computer-amc.jpg";
+  if (name.indexOf("data") !== -1 || name.indexOf("recover") !== -1) return "images/cat-data.jpg";
+  if (name.indexOf("custom pc") !== -1 || name.indexOf("computer") !== -1 || name.indexOf("desktop") !== -1) return "images/cat-pc.jpg";
+  return "images/cat-laptop.jpg";
 }
 
 let serviceMotion = 0;
@@ -681,6 +705,76 @@ function serviceLoopWidth(grid) {
   const first = originals[0].offsetLeft;
   const last = originals[originals.length - 1];
   return last.offsetLeft + last.offsetWidth - first + 14;
+}
+
+function initHeroSlider() {
+  const root = document.querySelector("[data-hero-slider]");
+  if (!root) return function () {};
+  const slides = [...root.querySelectorAll(".hero-slide")];
+  const dots = [...root.querySelectorAll(".hero-slider-dots button")];
+  if (slides.length < 2) return function () {};
+
+  let index = Math.max(0, slides.findIndex((slide) => slide.classList.contains("is-active")));
+  let timer = 0;
+  let paused = false;
+
+  const show = (next) => {
+    index = (next + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      const on = i === index;
+      slide.classList.toggle("is-active", on);
+      slide.setAttribute("aria-hidden", on ? "false" : "true");
+    });
+    dots.forEach((dot, i) => {
+      const on = i === index;
+      dot.classList.toggle("is-active", on);
+      dot.setAttribute("aria-selected", on ? "true" : "false");
+    });
+  };
+
+  const stop = () => {
+    if (timer) window.clearInterval(timer);
+    timer = 0;
+  };
+
+  const start = () => {
+    stop();
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    timer = window.setInterval(() => show(index + 1), 5200);
+  };
+
+  const onDotClick = (event) => {
+    const btn = event.target.closest("button[data-slide]");
+    if (!btn) return;
+    show(Number(btn.dataset.slide) || 0);
+    start();
+  };
+
+  const onEnter = () => {
+    paused = true;
+    stop();
+  };
+  const onLeave = () => {
+    paused = false;
+    start();
+  };
+
+  root.addEventListener("click", onDotClick);
+  root.addEventListener("mouseenter", onEnter);
+  root.addEventListener("mouseleave", onLeave);
+  root.addEventListener("focusin", onEnter);
+  root.addEventListener("focusout", onLeave);
+  show(index);
+  start();
+
+  return function () {
+    stop();
+    root.removeEventListener("click", onDotClick);
+    root.removeEventListener("mouseenter", onEnter);
+    root.removeEventListener("mouseleave", onLeave);
+    root.removeEventListener("focusin", onEnter);
+    root.removeEventListener("focusout", onLeave);
+  };
 }
 
 function startServiceRail() {
@@ -728,7 +822,13 @@ function renderServices(items) {
       article.className = "svc";
       const icon = document.createElement("span");
       icon.className = "svc-icon";
-      icon.append(svgUse(serviceIcon(item.title, index)));
+      const photo = document.createElement("img");
+      photo.src = servicePhoto(item.title);
+      photo.width = 160;
+      photo.height = 160;
+      photo.alt = "";
+      photo.loading = "lazy";
+      icon.append(photo);
       const heading = document.createElement("h3");
       heading.textContent = item.title;
       const text = document.createElement("p");
