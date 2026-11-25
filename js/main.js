@@ -626,7 +626,6 @@ function serviceIcon(title, index) {
 }
 
 let serviceMotion = 0;
-let serviceDir = 1;
 let serviceHold = false;
 let serviceHoldTimer = 0;
 
@@ -646,43 +645,48 @@ function holdServiceRail(ms) {
   }, ms);
 }
 
+function ensureServiceLoop(grid) {
+  if (!grid || grid.dataset.looped === "1") return;
+  const cards = [...grid.querySelectorAll(".svc:not([data-clone='1'])")];
+  if (cards.length < 2) return;
+  cards.forEach((card) => {
+    const clone = card.cloneNode(true);
+    clone.dataset.clone = "1";
+    clone.setAttribute("aria-hidden", "true");
+    clone.querySelectorAll("[data-service]").forEach((btn) => {
+      btn.dataset.service = card.querySelector("[data-service]")?.dataset.service || btn.dataset.service;
+    });
+    grid.appendChild(clone);
+  });
+  grid.dataset.looped = "1";
+}
+
+function serviceLoopWidth(grid) {
+  const originals = [...grid.querySelectorAll(".svc:not([data-clone='1'])")];
+  if (!originals.length) return 0;
+  const first = originals[0].offsetLeft;
+  const last = originals[originals.length - 1];
+  return last.offsetLeft + last.offsetWidth - first + 14;
+}
+
 function startServiceRail() {
   const grid = document.getElementById("serviceGrid");
   if (!grid || !document.querySelector(".service-rail") || serviceMotion) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  ensureServiceLoop(grid);
   const tick = () => {
     if (!grid.isConnected) {
       stopServiceRail();
       return;
     }
-    const max = grid.scrollWidth - grid.clientWidth;
-    if (max > 12 && !serviceHold) {
-      const next = grid.scrollLeft + serviceDir * 0.7;
-      if (next >= max) {
-        grid.scrollLeft = max;
-        serviceDir = -1;
-      } else if (next <= 0) {
-        grid.scrollLeft = 0;
-        serviceDir = 1;
-      } else {
-        grid.scrollLeft = next;
-      }
+    const loop = serviceLoopWidth(grid);
+    if (loop > 12 && !serviceHold) {
+      grid.scrollLeft += 0.75;
+      if (grid.scrollLeft >= loop) grid.scrollLeft -= loop;
     }
     serviceMotion = requestAnimationFrame(tick);
   };
   serviceMotion = requestAnimationFrame(tick);
-}
-
-function moveServiceRail(direction) {
-  const grid = document.getElementById("serviceGrid");
-  if (!grid) return;
-  const card = grid.querySelector(".svc");
-  const gap = 14;
-  const amount = card ? card.getBoundingClientRect().width + gap : 224;
-  serviceDir = direction < 0 ? -1 : 1;
-  holdServiceRail(900);
-  const max = Math.max(0, grid.scrollWidth - grid.clientWidth);
-  grid.scrollLeft = Math.min(max, Math.max(0, grid.scrollLeft + serviceDir * amount));
 }
 
 function bindServiceRail() {
@@ -692,11 +696,7 @@ function bindServiceRail() {
     rail.dataset.bound = "1";
     rail.addEventListener("pointerenter", () => { serviceHold = true; });
     rail.addEventListener("pointerleave", () => { serviceHold = false; });
-    rail.addEventListener("pointerdown", () => holdServiceRail(1200));
-    const prev = rail.querySelector(".rail-prev");
-    const next = rail.querySelector(".rail-next");
-    if (prev) prev.addEventListener("click", () => moveServiceRail(-1));
-    if (next) next.addEventListener("click", () => moveServiceRail(1));
+    rail.addEventListener("pointerdown", () => holdServiceRail(1400));
   }
   startServiceRail();
 }
@@ -705,7 +705,9 @@ function renderServices(items) {
   const grid = document.getElementById("serviceGrid");
   const footer = document.getElementById("footerServices");
   if (grid) {
+    stopServiceRail();
     grid.replaceChildren();
+    delete grid.dataset.looped;
     items.forEach((item, index) => {
       if (!item.title) return;
       const article = document.createElement("article");

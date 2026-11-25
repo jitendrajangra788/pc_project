@@ -102,7 +102,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Manrope:wght@500;600;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=6">
 </head>
 <body>
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -175,8 +175,8 @@
   <main id="main">
     <section class="hero" id="home">
       <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <p class="kicker light" data-edit="hero.kicker">Durgapura, Jaipur</p>
+        <div class="hero-copy glass-panel">
+          <p class="kicker glass-badge" data-edit="hero.kicker">Durgapura, Jaipur</p>
           <h1><span data-edit="hero.title">On-site laptop and computer repair in Jaipur</span> <em data-edit="hero.accent">at your door.</em></h1>
           <p class="lead" data-edit="hero.lead">We're your go-to experts for system setup, software support, upgrades, and everyday tech needs at home or in the office.</p>
           <ul class="checks" id="heroChecks">
@@ -186,8 +186,8 @@
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> <span>Annual maintenance (AMC)</span></li>
           </ul>
           <div class="hero-actions">
-            <a class="btn btn-white" href="book/index.html">Book a service</a>
-            <a class="btn btn-green" href="https://wa.me/919024683436" target="_blank" rel="noopener">
+            <a class="btn btn-primary" href="book/index.html">Book a service</a>
+            <a class="btn btn-ink" href="https://wa.me/919024683436" target="_blank" rel="noopener">
               <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
               WhatsApp now
             </a>
@@ -236,7 +236,6 @@
           <a class="btn btn-ghost see-all" href="services/index.html">See All</a>
         </div>
         <div class="service-rail">
-          <button class="rail-btn rail-prev" type="button" aria-label="Previous services"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           <div class="services-grid" id="serviceGrid">
           <article class="svc">
             <span class="svc-icon"><svg class="icon" aria-hidden="true"><use href="#i-desktop"/></svg></span>
@@ -287,7 +286,6 @@
             <button class="linkish" type="button" data-service="AMC Services">View details <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           </article>
           </div>
-          <button class="rail-btn rail-next" type="button" aria-label="Next services"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
       </div>
     </section>
@@ -518,7 +516,8 @@
 
     <section class="section" id="contact" aria-label="Get in touch">
       <div class="wrap contact-grid">
-        <div class="faq-card">
+        <div class="faq-card glass-panel">
+          <p class="kicker">FAQ</p>
           <h2 data-edit="faq.title">Questions about computer repair in Jaipur</h2>
           <div class="faq-list">
             <details class="faq">
@@ -547,7 +546,7 @@
             </details>
           </div>
         </div>
-        <div class="contact-card">
+        <div class="contact-card glass-panel">
           <h2 data-edit="contact.title">Get in touch with SKYPC</h2>
           <p class="muted">We are here to help. Reach out to us.</p>
           <ul class="info-list">
@@ -682,6 +681,6 @@
     </div>
   </dialog>
 
-  <script src="js/main.js?v=13"></script>
+  <script src="js/main.js?v=20"></script>
 </body>
 </html>
