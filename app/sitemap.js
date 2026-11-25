@@ -5,6 +5,7 @@ export default function sitemap() {
     { url: "https://skypc.in/services", lastModified },
     { url: "https://skypc.in/book", lastModified },
     { url: "https://skypc.in/about", lastModified },
+    { url: "https://skypc.in/amc", lastModified },
     { url: "https://skypc.in/contact", lastModified },
     { url: "https://skypc.in/blog", lastModified },
     { url: "https://skypc.in/blog/laptop-repair-jaipur", lastModified },

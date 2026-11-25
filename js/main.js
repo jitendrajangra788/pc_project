@@ -233,7 +233,7 @@ nav.addEventListener("click", (event) => {
     if (serviceName && serviceDialog) openService(serviceName);
 
     const planBtn = event.target.closest("[data-plan]");
-    if (planBtn && bookForm) selectPlan(planBtn.dataset.plan);
+    if (planBtn) selectPlan(planBtn.dataset.plan);
 
     const policyBtn = event.target.closest("[data-policy]");
     if (policyBtn && policyDialog) {
