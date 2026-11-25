@@ -1420,22 +1420,47 @@ h2 { font-size: clamp(1.7rem, 3vw, 2.35rem); }
 
 .why-copy h2 { margin: 8px 0; }
 
-.partner-badge {
-  width: 180px;
-  height: 180px;
+.google-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-left: auto;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 22px;
-  border-radius: 50%;
-  color: white;
-  background: radial-gradient(circle at 35% 30%, #3d82f6, #0b2144 68%);
-  box-shadow: 0 16px 40px rgba(11, 33, 68, 0.2);
+  padding: 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  border: 1px solid #e4edf7;
+  box-shadow: 0 12px 28px rgba(11, 33, 68, 0.06);
 }
 
-.partner-badge .icon { width: 28px; height: 28px; margin: 0 auto 8px; }
-.partner-badge strong { display: block; font-size: 1.05rem; line-height: 1.3; }
+.google-badge-score {
+  font-family: var(--display);
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.google-badge .stars {
+  display: block;
+  color: var(--gold);
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+.google-badge strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.92rem;
+}
+
+.google-badge small {
+  display: block;
+  color: var(--muted);
+  font-size: 12.5px;
+  font-weight: 650;
+}
 
 .why-list {
   grid-column: 1 / -1;
@@ -2453,7 +2478,7 @@ details[open] .plus::after { display: none; }
   .catalog-grid { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr 1fr; }
   .steps::before { display: none; }
-  .partner-badge { margin: 0 auto; }
+  .google-badge { margin: 0 auto; width: min(100%, 280px); }
   .why-copy { text-align: center; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .section, .band, .band-dark { padding: 60px 0; }
