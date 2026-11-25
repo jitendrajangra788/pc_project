@@ -102,7 +102,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Manrope:wght@500;600;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=7">
+  <link rel="stylesheet" href="css/styles.css?v=11">
 </head>
 <body>
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -130,13 +130,6 @@
 
   <a class="skip" href="#main">Skip to content</a>
 
-  <div class="topbar">
-    <div class="wrap topbar-inner">
-      <p><a class="map-link visitor-place" href="https://www.google.com/maps" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> <span class="visitor-spot">Your location</span></a></p>
-      <p><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> <span data-edit="hours">On-site and remote support</span></p>
-    </div>
-  </div>
-
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="logo" href="#home">
@@ -145,6 +138,10 @@
           <strong>SKYPC</strong>
           <small data-edit="tagline">Smart service. Reliable support.</small>
         </span>
+      </a>
+      <a class="header-loc map-link visitor-place" href="https://www.google.com/maps" target="_blank" rel="noopener" title="Your area">
+        <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
+        <span class="visitor-spot">Jaipur</span>
       </a>
       <nav id="siteNav" class="nav" aria-label="Primary">
         <a href="#home">Home</a>
@@ -155,11 +152,11 @@
         <a href="contact/index.html">Contact</a>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-ghost phone-btn" href="tel:+919024683436">
+        <a class="btn btn-ghost phone-btn" href="tel:+919024683436" aria-label="Call SKYPC">
           <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
           <span data-edit="phone">+91 90246 83436</span>
         </a>
-        <a class="btn btn-green" href="https://wa.me/919024683436" target="_blank" rel="noopener">
+        <a class="btn btn-green wa-btn" href="https://wa.me/919024683436" target="_blank" rel="noopener" aria-label="WhatsApp">
           <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
           <span>WhatsApp</span>
         </a>
@@ -659,6 +656,6 @@
     </div>
   </dialog>
 
-  <script src="js/main.js?v=21"></script>
+  <script src="js/main.js?v=24"></script>
 </body>
 </html>

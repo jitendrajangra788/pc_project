@@ -886,25 +886,31 @@ function placeLabel(address) {
   const area = address.neighbourhood || address.suburb || address.quarter || address.city_district || address.residential || address.hamlet || address.village;
   const city = address.state_district || address.town || address.city || address.county;
   const parts = [];
-  [area, city, address.state].forEach((part) => {
+  [area, city].forEach((part) => {
     const text = cleanPlace(part);
     if (!text || /municipal|corporation/i.test(text)) return;
     if (parts.some((item) => item.toLowerCase() === text.toLowerCase())) return;
     parts.push(text);
   });
+  if (!parts.length) {
+    const state = cleanPlace(address.state);
+    if (state) parts.push(state);
+  }
   return parts.join(", ");
 }
 
 function setVisitorPlace(label, href) {
+  const full = String(label || "").trim() || "Jaipur";
   document.querySelectorAll("a.visitor-place").forEach((link) => {
     const spot = link.querySelector(".visitor-spot");
-    if (spot) spot.textContent = label;
+    if (spot) spot.textContent = full;
     if (href) link.href = href;
-    link.title = label;
+    link.title = full;
+    link.setAttribute("aria-label", "Location: " + full);
   });
   const area = document.getElementById("area");
-  if (!area || !label || label === "Your location" || area.dataset.manual === "1") return;
-  area.value = label.slice(0, area.maxLength || 120);
+  if (!area || !full || full === "Your location" || area.dataset.manual === "1") return;
+  area.value = full.slice(0, area.maxLength || 120);
 }
 
 function readVisitorPlace(lat, lng) {
@@ -915,10 +921,10 @@ function readVisitorPlace(lat, lng) {
     .then((data) => {
       if (!document.querySelector("a.visitor-place")) return;
       const label = data ? placeLabel(data.address) : "";
-      setVisitorPlace(label || "Your location", href);
+      setVisitorPlace(label || "Jaipur", href);
     })
     .catch(() => {
-      if (document.querySelector("a.visitor-place")) setVisitorPlace("Your location", href);
+      if (document.querySelector("a.visitor-place")) setVisitorPlace("Jaipur", href);
     });
 }
 
