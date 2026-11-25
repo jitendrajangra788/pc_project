@@ -2459,6 +2459,18 @@ details[open] .plus::after { display: none; }
   gap: 12px;
 }
 
+.faq-page-card {
+  box-shadow: 0 16px 40px rgba(11, 33, 68, 0.08);
+}
+
+.faq-page-card .faq-list { margin-top: 20px; }
+
+.section-head .see-all.faqs-link,
+.faq-card .see-all {
+  margin-top: 14px;
+  display: inline-flex;
+}
+
 .contact-follow {
   margin-top: 18px;
   padding: 0;

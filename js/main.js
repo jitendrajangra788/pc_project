@@ -543,6 +543,7 @@ function trackView() {
 }
 
 function applyFaqs() {
+  if (/\/faqs(?:\/|$)/i.test(location.pathname) || /faqs[/\\]index\.html$/i.test(location.pathname)) return;
   const saved = readStore(FAQ_KEY, null);
   const list = document.querySelector(".faq-list");
   if (!saved || !list) return;
