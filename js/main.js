@@ -608,7 +608,13 @@ function renderChecks(items) {
   items.forEach((item) => {
     if (!item.text) return;
     const li = document.createElement("li");
-    li.append(svgUse("#i-check"), document.createTextNode(" " + item.text));
+    const ico = document.createElement("span");
+    ico.className = "check-ico";
+    ico.setAttribute("aria-hidden", "true");
+    ico.append(svgUse("#i-check"));
+    const label = document.createElement("span");
+    label.textContent = item.text;
+    li.append(ico, label);
     list.append(li);
   });
 }

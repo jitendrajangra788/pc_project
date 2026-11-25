@@ -42,67 +42,11 @@
     "priceRange": "₹₹"
   }
   </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Why is my computer running slower than usual?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Over time, systems accumulate background processes, outdated software, and unnecessary files. We can help optimize your system's performance and ensure it runs efficiently."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can you help with virus or malware issues?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. We offer full system scans and threat removal so the computer is clean, secure, and running smoothly."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you provide laptop screen or battery replacements?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "If your screen is cracked or your battery does not hold a charge, we offer component replacement using quality parts."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What should I do if my PC does not turn on?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "First, check the power source and cables. If the issue persists, book a diagnostic so we can identify the cause."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can you help retrieve data from a non-working device?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. We recover data from hard drives, SSDs, and other storage, even if the system is not powering on."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is IT AMC service in Jaipur?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "IT AMC (Annual Maintenance Contract) is regular maintenance, repair, and support for computers, laptops, printers, and IT setup in Jaipur."
-        }
-      }
-    ]
-  }
-  </script>
   <link rel="icon" href="images/logo.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Manrope:wght@500;600;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=11">
+  <link rel="stylesheet" href="css/styles.css?v=14">
 </head>
 <body>
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -170,26 +114,33 @@
 
   <main id="main">
     <section class="hero" id="home">
+      <div class="hero-aurora" aria-hidden="true">
+        <span class="orb orb-a"></span>
+        <span class="orb orb-b"></span>
+        <span class="orb orb-c"></span>
+      </div>
       <div class="wrap hero-grid">
         <div class="hero-copy glass-panel">
           <p class="kicker glass-badge" data-edit="hero.kicker">Durgapura, Jaipur</p>
           <h1><span data-edit="hero.title">On-site laptop and computer repair in Jaipur</span> <em data-edit="hero.accent">at your door.</em></h1>
           <p class="lead" data-edit="hero.lead">We're your go-to experts for system setup, software support, upgrades, and everyday tech needs at home or in the office.</p>
           <ul class="checks" id="heroChecks">
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> <span>Computer and laptop service</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> <span>Apple, printer and CCTV</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> <span>Data recovery and Wi-Fi</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> <span>Annual maintenance (AMC)</span></li>
+            <li><span class="check-ico" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span> <span>Computer and laptop service</span></li>
+            <li><span class="check-ico" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span> <span>Apple, printer and CCTV</span></li>
+            <li><span class="check-ico" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span> <span>Data recovery and Wi-Fi</span></li>
+            <li><span class="check-ico" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span> <span>Annual maintenance (AMC)</span></li>
           </ul>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="book/index.html">Book a service</a>
-            <a class="btn btn-ink" href="https://wa.me/919024683436" target="_blank" rel="noopener">
+            <a class="btn btn-primary hero-cta" href="book/index.html">Book a service</a>
+            <a class="btn btn-ink hero-cta" href="https://wa.me/919024683436" target="_blank" rel="noopener">
               <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
               WhatsApp now
             </a>
           </div>
+          <p class="hero-trust"><span>Same-day visits</span><span>Pay after service</span><span>Durgapura based</span></p>
         </div>
         <article class="ticket" aria-label="How a doorstep visit moves">
+          <div class="ticket-sheen" aria-hidden="true"></div>
           <div class="ticket-head">
             <span class="live"><i class="pulse-dot" aria-hidden="true"></i> Doorstep visit</span>
             <span class="loc"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Jaipur</span>
@@ -372,10 +323,11 @@
       </div>
     </section>
 
-    <section class="band" id="stories" aria-labelledby="storyTitle">
+    <section class="band story-band" id="stories" aria-labelledby="storyTitle">
       <div class="wrap story-grid">
         <div id="reviewStack">
           <figure class="quote-card">
+            <span class="quote-orb" aria-hidden="true"></span>
             <p class="quote-kicker">Trusted in Jaipur</p>
             <blockquote>
               <p>Smart Service. Reliable Support. SKYPC ensures your systems stay strong.</p>
@@ -388,6 +340,7 @@
             <figcaption>
               <img class="avatar-logo" src="images/logo.jpg" width="80" height="80" alt="">
               <span><strong>SKYPC</strong><small>Durgapura, Jaipur</small></span>
+              <a class="quote-cta" href="about/index.html">About us</a>
             </figcaption>
           </figure>
         </div>
@@ -396,32 +349,33 @@
             <div>
               <p class="kicker">Work we do</p>
               <h2 id="storyTitle">Repair and install work in Jaipur</h2>
+              <p class="gallery-lede">Real jobs we handle at home, shop and office — tap a card to book.</p>
             </div>
             <button class="btn btn-ghost" id="moreWork" type="button">View more</button>
           </div>
           <div class="gallery">
             <button class="shot" type="button" data-service="Laptop Services">
-              <span class="shot-visual v1"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg></span>
+              <span class="shot-visual v1"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg></span></span>
               <p><strong>Laptop screen repair</strong><span>At-home visit</span></p>
             </button>
             <button class="shot" type="button" data-service="Computer Services">
-              <span class="shot-visual v2"><svg class="icon" aria-hidden="true"><use href="#i-desktop"/></svg></span>
+              <span class="shot-visual v2"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-desktop"/></svg></span></span>
               <p><strong>Desktop servicing</strong><span>Office visit</span></p>
             </button>
             <button class="shot" type="button" data-service="Printer Services">
-              <span class="shot-visual v3"><svg class="icon" aria-hidden="true"><use href="#i-printer"/></svg></span>
+              <span class="shot-visual v3"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-printer"/></svg></span></span>
               <p><strong>Printer setup &amp; repair</strong><span>Home and office</span></p>
             </button>
             <button class="shot" type="button" data-service="CCTV Services">
-              <span class="shot-visual v4"><svg class="icon" aria-hidden="true"><use href="#i-cctv"/></svg></span>
+              <span class="shot-visual v4"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-cctv"/></svg></span></span>
               <p><strong>CCTV installation</strong><span>Shop and home</span></p>
             </button>
             <button class="shot is-extra" type="button" data-service="Wifi Services" hidden>
-              <span class="shot-visual v5"><svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg></span>
+              <span class="shot-visual v5"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg></span></span>
               <p><strong>Wi-Fi and networking</strong><span>Coverage fix</span></p>
             </button>
             <button class="shot is-extra" type="button" data-service="AMC Services" hidden>
-              <span class="shot-visual v6"><svg class="icon" aria-hidden="true"><use href="#i-tool"/></svg></span>
+              <span class="shot-visual v6"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-tool"/></svg></span></span>
               <p><strong>AMC visit</strong><span>Planned service</span></p>
             </button>
           </div>
@@ -488,68 +442,6 @@
       </div>
     </section>
 
-    <section class="section" id="contact" aria-label="Get in touch">
-      <div class="wrap contact-grid">
-        <div class="faq-card glass-panel">
-          <p class="kicker">FAQ</p>
-          <h2 data-edit="faq.title">Questions about computer repair in Jaipur</h2>
-          <div class="faq-list">
-            <details class="faq">
-              <summary>Why is my computer running slower than usual? <span class="plus" aria-hidden="true"></span></summary>
-              <p>Over time, systems accumulate background processes, outdated software, and unnecessary files. We can help optimize your system’s performance and ensure it runs efficiently.</p>
-            </details>
-            <details class="faq">
-              <summary>Can you help with virus or malware issues? <span class="plus" aria-hidden="true"></span></summary>
-              <p>Yes. We offer full system scans and threat removal so the computer is clean, secure, and running smoothly.</p>
-            </details>
-            <details class="faq">
-              <summary>Do you provide laptop screen or battery replacements? <span class="plus" aria-hidden="true"></span></summary>
-              <p>If your screen is cracked or your battery does not hold a charge, we offer component replacement using quality parts.</p>
-            </details>
-            <details class="faq">
-              <summary>What should I do if my PC does not turn on? <span class="plus" aria-hidden="true"></span></summary>
-              <p>First, check the power source and cables. If the issue persists, book a diagnostic so we can identify the cause.</p>
-            </details>
-            <details class="faq">
-              <summary>Can you help retrieve data from a non-working device? <span class="plus" aria-hidden="true"></span></summary>
-              <p>Yes. We recover data from hard drives, SSDs, and other storage, even if the system is not powering on.</p>
-            </details>
-            <details class="faq">
-              <summary>What is IT AMC service in Jaipur? <span class="plus" aria-hidden="true"></span></summary>
-              <p>IT AMC is regular maintenance, repair, and support for computers, laptops, printers, and IT setup in Jaipur.</p>
-            </details>
-          </div>
-          <a class="btn btn-ghost see-all" href="faqs/index.html">See all FAQs</a>
-        </div>
-        <div class="contact-card glass-panel">
-          <h2 data-edit="contact.title">Get in touch with SKYPC</h2>
-          <p class="muted">We are here to help. Reach out to us.</p>
-          <ul class="info-list">
-            <li>
-              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
-              <div><small>Phone</small><a data-edit="phone" href="tel:+919024683436">+91 90246 83436</a></div>
-            </li>
-            <li>
-              <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
-              <div><small>Email</small><a data-edit="email" href="mailto:support@skypc.in">support@skypc.in</a></div>
-            </li>
-            <li>
-              <svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>
-              <div><small>Location</small><a class="map-link" data-edit="city" href="https://www.google.com/maps/place/Durgapura,+Jaipur,+Rajasthan/@26.8517972,75.7862232,15z" target="_blank" rel="noopener">Durgapura, Jaipur, Rajasthan</a></div>
-            </li>
-          </ul>
-        </div>
-        <aside class="help-card">
-          <p class="kicker">Need help?</p>
-          <h2 data-edit="help.title">Call SKYPC for a Jaipur visit</h2>
-          <a class="phone-big" data-edit="phone" href="tel:+919024683436">+91 90246 83436</a>
-          <a class="btn btn-green" href="https://wa.me/919024683436" target="_blank" rel="noopener">
-            <svg class="icon" aria-hidden="true"><use href="#i-wa"/></svg>
-            WhatsApp
-          </a>
-        </aside>
-      </div>
-    </section>
   </main>
 
   <footer class="footer">
