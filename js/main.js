@@ -440,6 +440,12 @@ navLinks.forEach((link) => {
   trackView();
   applyDesk();
   bindServiceRail();
+  let stopFaqsHelp = function () {};
+  if (document.querySelector(".help-page")) {
+    import("./faqs-help.js").then((mod) => {
+      stopFaqsHelp = mod.initFaqsHelp() || function () {};
+    });
+  }
   const params = new URLSearchParams(location.search);
   const requestedService = params.get("service");
   const requestedPlan = params.get("plan");
@@ -465,6 +471,7 @@ navLinks.forEach((link) => {
     bookBar.remove();
     document.body.classList.remove("has-book-bar");
     stopServiceRail();
+    stopFaqsHelp();
   };
 }
 

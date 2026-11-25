@@ -1,3 +1,4 @@
+import "../../css/faqs-help.css";
 import SiteFrame from "../../components/SiteFrame";
 import { readLegacy } from "../../lib/legacy";
 
