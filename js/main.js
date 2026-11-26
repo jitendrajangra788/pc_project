@@ -675,12 +675,12 @@ function mediaUrl(path) {
 
 const searchHints = [
   "laptop repair",
-  "MacBook repair",
-  "CCTV installation",
-  "printer setup",
-  "Wi-Fi fix",
-  "custom PC build",
-  "computer AMC"
+  "MacBook",
+  "CCTV",
+  "printer",
+  "Wi-Fi",
+  "PC build",
+  "AMC"
 ];
 
 const serviceSearchMeta = {
