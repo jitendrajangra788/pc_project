@@ -46,7 +46,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Manrope:wght@500;600;700;800&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=28">
+  <link rel="stylesheet" href="css/styles.css?v=33">
 </head>
 <body>
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -113,7 +113,6 @@
       </div>
       <div class="wrap hero-grid">
         <div class="hero-cats">
-          <p class="hero-cats-kicker">Durgapura, Jaipur</p>
           <h1 class="hero-cats-title">What do you need help with?</h1>
           <div class="hero-cat-grid" aria-label="Popular services">
             <button class="hero-cat" type="button" data-service="Apple Services">
@@ -140,9 +139,14 @@
               </span>
               <span class="hero-cat-label">Custom PC Build</span>
             </button>
-            <a class="hero-cat hero-cat-all" href="services/index.html">
-              <span class="hero-cat-ico" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span>
-              <span class="hero-cat-label">View All Services</span>
+            <a class="hero-cat-all" href="services/index.html">
+              <span class="hero-cat-all-copy">
+                <strong>View all services</strong>
+                <small>Computer, laptop, CCTV, AMC and more</small>
+              </span>
+              <span class="hero-cat-all-go" aria-hidden="true">
+                <svg class="icon"><use href="#i-arrow"/></svg>
+              </span>
             </a>
           </div>
         </div>
@@ -363,27 +367,39 @@
           </div>
           <div class="gallery">
             <button class="shot" type="button" data-service="Laptop Services">
-              <span class="shot-visual v1"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-laptop"/></svg></span></span>
+              <span class="shot-visual">
+                <img src="images/laptop-repair.jpg" width="640" height="400" alt="" loading="lazy">
+              </span>
               <p><strong>Laptop screen repair</strong><span>At-home visit</span></p>
             </button>
             <button class="shot" type="button" data-service="Computer Services">
-              <span class="shot-visual v2"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-desktop"/></svg></span></span>
+              <span class="shot-visual">
+                <img src="images/cat-pc.jpg" width="640" height="400" alt="" loading="lazy">
+              </span>
               <p><strong>Desktop servicing</strong><span>Office visit</span></p>
             </button>
             <button class="shot" type="button" data-service="Printer Services">
-              <span class="shot-visual v3"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-printer"/></svg></span></span>
+              <span class="shot-visual">
+                <img src="images/cat-printer.jpg" width="640" height="400" alt="" loading="lazy">
+              </span>
               <p><strong>Printer setup &amp; repair</strong><span>Home and office</span></p>
             </button>
             <button class="shot" type="button" data-service="CCTV Services">
-              <span class="shot-visual v4"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-cctv"/></svg></span></span>
+              <span class="shot-visual">
+                <img src="images/cctv-install.jpg" width="640" height="400" alt="" loading="lazy">
+              </span>
               <p><strong>CCTV installation</strong><span>Shop and home</span></p>
             </button>
             <button class="shot is-extra" type="button" data-service="Wifi Services" hidden>
-              <span class="shot-visual v5"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg></span></span>
+              <span class="shot-visual">
+                <img src="images/slow-wifi.jpg" width="640" height="400" alt="" loading="lazy">
+              </span>
               <p><strong>Wi-Fi and networking</strong><span>Coverage fix</span></p>
             </button>
             <button class="shot is-extra" type="button" data-service="AMC Services" hidden>
-              <span class="shot-visual v6"><span class="shot-ico"><svg class="icon" aria-hidden="true"><use href="#i-tool"/></svg></span></span>
+              <span class="shot-visual">
+                <img src="images/computer-amc.jpg" width="640" height="400" alt="" loading="lazy">
+              </span>
               <p><strong>AMC visit</strong><span>Planned service</span></p>
             </button>
           </div>
@@ -494,19 +510,6 @@
           <li><button class="link" type="button" data-service="Data Recovery Services">Data Recovery Services</button></li>
           <li><button class="link" type="button" data-service="Wifi Services">Wifi Services</button></li>
           <li><button class="link" type="button" data-service="AMC Services">AMC Services</button></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Service areas</h3>
-        <ul class="areas">
-          <li>Durgapura</li>
-          <li>Vaishali Nagar</li>
-          <li>Malviya Nagar</li>
-          <li>Mansarovar</li>
-          <li>Raja Park</li>
-          <li>C-Scheme</li>
-          <li>Jagatpura</li>
-          <li>Tonk Road</li>
         </ul>
       </div>
       <div>
