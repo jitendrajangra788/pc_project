@@ -223,7 +223,10 @@ nav.addEventListener("click", (event) => {
 });
 
   const onKey = (event) => {
-    if (event.key === "Escape") closeMenu();
+    if (event.key === "Escape") {
+      closeMenu();
+      closeHeaderSearch();
+    }
   };
   const onResize = () => {
     if (window.innerWidth > 1080) closeMenu();
@@ -450,6 +453,7 @@ navLinks.forEach((link) => {
   applyDesk();
   bindServiceRail();
   const stopHeroSlider = initHeroSlider();
+  const stopHeaderSearch = initHeaderSearch();
   let stopFaqsHelp = function () {};
   if (document.querySelector(".help-page")) {
     import("./faqs-help.js").then((mod) => {
@@ -482,6 +486,7 @@ navLinks.forEach((link) => {
     document.body.classList.remove("has-book-bar");
     stopServiceRail();
     stopHeroSlider();
+    stopHeaderSearch();
     stopFaqsHelp();
   };
 }
@@ -661,6 +666,220 @@ function servicePhoto(title) {
   if (name.indexOf("data") !== -1 || name.indexOf("recover") !== -1) return "images/cat-data.jpg";
   if (name.indexOf("custom pc") !== -1 || name.indexOf("computer") !== -1 || name.indexOf("desktop") !== -1) return "images/cat-pc.jpg";
   return "images/cat-laptop.jpg";
+}
+
+function mediaUrl(path) {
+  const clean = String(path || "").replace(/^\.\//, "").replace(/^\//, "");
+  return "/" + clean;
+}
+
+const searchHints = [
+  "laptop repair",
+  "MacBook repair",
+  "CCTV installation",
+  "printer setup",
+  "Wi-Fi fix",
+  "custom PC build",
+  "computer AMC"
+];
+
+const serviceSearchMeta = {
+  "Computer Services": "computer desktop pc slow virus ram ssd upgrade diagnosis",
+  "Laptop Services": "laptop screen battery heating repair doorstep",
+  "Apple Services": "apple mac macbook imac",
+  "Printer Services": "printer print ink jam wifi share",
+  "CCTV Services": "cctv camera security install shop home",
+  "Data Recovery Services": "data recovery hard disk hdd ssd lost files",
+  "Wifi Services": "wifi wi-fi router network signal internet",
+  "AMC Services": "amc maintenance yearly support contract office",
+  "Custom PC Build": "custom pc build gaming editing assemble"
+};
+
+function ensureHeaderSearch() {
+  const inner = document.querySelector(".header-inner");
+  if (!inner) return null;
+  let root = inner.querySelector("[data-header-search]");
+  if (root) return root;
+
+  root = document.createElement("div");
+  root.className = "header-search";
+  root.dataset.headerSearch = "";
+  root.innerHTML =
+    '<label class="header-search-field" for="headerSearch">' +
+      '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
+      '<input id="headerSearch" type="search" name="q" placeholder="Search for services" autocomplete="off" enterkeyhint="search" aria-autocomplete="list" aria-controls="headerSearchResults" aria-expanded="false">' +
+    "</label>" +
+    '<div class="header-search-results" id="headerSearchResults" role="listbox" hidden></div>';
+
+  const nav = inner.querySelector(".nav");
+  if (nav) inner.insertBefore(root, nav);
+  else {
+    const actions = inner.querySelector(".header-actions");
+    if (actions) inner.insertBefore(root, actions);
+    else inner.appendChild(root);
+  }
+  return root;
+}
+
+function closeHeaderSearch() {
+  const root = document.querySelector("[data-header-search]");
+  if (!root) return;
+  const input = root.querySelector("input");
+  const results = root.querySelector(".header-search-results");
+  root.classList.remove("is-open");
+  if (results) {
+    results.hidden = true;
+    results.innerHTML = "";
+  }
+  if (input) input.setAttribute("aria-expanded", "false");
+}
+
+function pickServiceFromSearch(name) {
+  if (!name) return;
+  if (typeof openService === "function" && serviceDialog) {
+    openService(name);
+    return;
+  }
+  location.href = "/book?service=" + encodeURIComponent(name);
+}
+
+function filterServices(query) {
+  const q = String(query || "").trim().toLowerCase();
+  const names = Object.keys(services);
+  if (!q) {
+    return names.slice(0, 6).map((name) => ({
+      name,
+      text: services[name].text,
+      photo: mediaUrl(servicePhoto(name))
+    }));
+  }
+  const scored = names.map((name) => {
+    const hay = (
+      name + " " +
+      (services[name].text || "") + " " +
+      (serviceSearchMeta[name] || "")
+    ).toLowerCase();
+    let score = 0;
+    if (name.toLowerCase().indexOf(q) === 0) score += 40;
+    if (name.toLowerCase().indexOf(q) !== -1) score += 24;
+    q.split(/\s+/).forEach((part) => {
+      if (part && hay.indexOf(part) !== -1) score += 12;
+    });
+    return { name, text: services[name].text, photo: mediaUrl(servicePhoto(name)), score };
+  }).filter((item) => item.score > 0);
+  scored.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
+  return scored.slice(0, 7);
+}
+
+function initHeaderSearch() {
+  const root = ensureHeaderSearch();
+  if (!root) return function () {};
+  const input = root.querySelector("input");
+  const results = root.querySelector(".header-search-results");
+  const field = root.querySelector(".header-search-field");
+  if (!input || !results) return function () {};
+
+  let active = -1;
+  let hintTimer = 0;
+  let hintIndex = 0;
+  let items = [];
+
+  const setHint = () => {
+    if (document.activeElement === input || input.value) return;
+    hintIndex = (hintIndex + 1) % searchHints.length;
+    input.placeholder = "Search for '" + searchHints[hintIndex] + "'";
+  };
+  input.placeholder = "Search for '" + searchHints[0] + "'";
+  hintTimer = window.setInterval(setHint, 3200);
+
+  const render = (query, open) => {
+    items = filterServices(query);
+    active = items.length ? 0 : -1;
+    if (!open && !String(query || "").trim() && document.activeElement !== input) {
+      closeHeaderSearch();
+      return;
+    }
+    if (!items.length) {
+      results.innerHTML = '<div class="header-search-empty">No matching service. Try laptop, CCTV, printer or AMC.</div>';
+    } else {
+      results.innerHTML = items.map((item, index) => (
+        '<button class="header-search-item' + (index === active ? " is-active" : "") + '" type="button" role="option" data-service-pick="' +
+        item.name.replace(/"/g, "&quot;") + '" aria-selected="' + (index === active ? "true" : "false") + '">' +
+          '<img class="header-search-thumb" src="' + item.photo + '" alt="" width="44" height="44" loading="lazy">' +
+          '<span class="header-search-copy"><strong>' + item.name + "</strong><small>" + item.text + "</small></span>" +
+        "</button>"
+      )).join("");
+    }
+    results.hidden = false;
+    root.classList.add("is-open");
+    input.setAttribute("aria-expanded", "true");
+  };
+
+  const moveActive = (delta) => {
+    if (!items.length || results.hidden) return;
+    active = (active + delta + items.length) % items.length;
+    [...results.querySelectorAll(".header-search-item")].forEach((btn, index) => {
+      const on = index === active;
+      btn.classList.toggle("is-active", on);
+      btn.setAttribute("aria-selected", on ? "true" : "false");
+      if (on) btn.scrollIntoView({ block: "nearest" });
+    });
+  };
+
+  const choose = (name) => {
+    input.value = "";
+    input.placeholder = "Search for services";
+    closeHeaderSearch();
+    pickServiceFromSearch(name);
+  };
+
+  const onInput = () => render(input.value, true);
+  const onFocus = () => render(input.value, true);
+  const onKeydown = (event) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      if (results.hidden) render(input.value, true);
+      else moveActive(1);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      moveActive(-1);
+    } else if (event.key === "Enter") {
+      if (!results.hidden && active >= 0 && items[active]) {
+        event.preventDefault();
+        choose(items[active].name);
+      }
+    } else if (event.key === "Escape") {
+      closeHeaderSearch();
+      input.blur();
+    }
+  };
+  const onResultsClick = (event) => {
+    const btn = event.target.closest("[data-service-pick]");
+    if (!btn) return;
+    choose(btn.getAttribute("data-service-pick"));
+  };
+  const onDocPointer = (event) => {
+    if (!root.contains(event.target)) closeHeaderSearch();
+  };
+  const onFieldClick = () => input.focus();
+
+  input.addEventListener("input", onInput);
+  input.addEventListener("focus", onFocus);
+  input.addEventListener("keydown", onKeydown);
+  results.addEventListener("click", onResultsClick);
+  field.addEventListener("click", onFieldClick);
+  document.addEventListener("pointerdown", onDocPointer);
+
+  return function () {
+    if (hintTimer) clearInterval(hintTimer);
+    input.removeEventListener("input", onInput);
+    input.removeEventListener("focus", onFocus);
+    input.removeEventListener("keydown", onKeydown);
+    results.removeEventListener("click", onResultsClick);
+    field.removeEventListener("click", onFieldClick);
+    document.removeEventListener("pointerdown", onDocPointer);
+    closeHeaderSearch();
+  };
 }
 
 let serviceMotion = 0;
@@ -1013,11 +1232,19 @@ function placeLabel(address) {
   return parts.join(", ");
 }
 
+function shortPlaceLabel(label) {
+  const full = String(label || "").trim();
+  if (!full) return "Jaipur";
+  const first = full.split(",")[0].trim();
+  return (first || full).slice(0, 16);
+}
+
 function setVisitorPlace(label, href) {
   const full = String(label || "").trim() || "Jaipur";
+  const short = shortPlaceLabel(full);
   document.querySelectorAll("a.visitor-place").forEach((link) => {
     const spot = link.querySelector(".visitor-spot");
-    if (spot) spot.textContent = full;
+    if (spot) spot.textContent = short;
     if (href) link.href = href;
     link.title = full;
     link.setAttribute("aria-label", "Location: " + full);
