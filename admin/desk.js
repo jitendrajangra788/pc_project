@@ -55,10 +55,6 @@ const defaultFaqs = [
     a: "First, check the power source and cables. If the issue persists, book a diagnostic so we can identify the cause."
   },
   {
-    q: "Can you help retrieve data from a non-working device?",
-    a: "Yes. We recover data from hard drives, SSDs, and other storage, even if the system is not powering on."
-  },
-  {
     q: "What is IT AMC service in Jaipur?",
     a: "IT AMC is regular maintenance, repair, and support for computers, laptops, printers, and IT setup in Jaipur."
   }
@@ -66,7 +62,7 @@ const defaultFaqs = [
 
 const defaultMarket = {
   title: "On-Site Laptop, Computer & Printer Repair in Jaipur | SKYPC",
-  description: "SKYPC in Durgapura, Jaipur: computer, laptop, Apple, printer, CCTV, data recovery, Wi-Fi and AMC. Call +91 90246 83436.",
+  description: "SKYPC in Durgapura, Jaipur: computer, laptop, Apple, printer, CCTV, Wi-Fi and AMC. Call +91 90246 83436.",
   whatsapp: "Hello SKYPC, I need a computer service in Jaipur."
 };
 
@@ -608,7 +604,7 @@ const defaultLists = {
   checks: [
     { text: "Computer and laptop service" },
     { text: "Apple, printer and CCTV" },
-    { text: "Data recovery and Wi-Fi" },
+    { text: "Wi-Fi and networking" },
     { text: "Annual maintenance (AMC)" }
   ],
   services: [
@@ -617,7 +613,6 @@ const defaultLists = {
     { title: "Apple Services", text: "MacBook and iMac service in Jaipur. Not an Apple-authorised centre." },
     { title: "Printer Services", text: "Printer setup and servicing for home and office." },
     { title: "CCTV Services", text: "CCTV installation and support for homes, shops and offices." },
-    { title: "Data Recovery Services", text: "Recovery from hard drives and SSDs, including devices that do not turn on." },
     { title: "Wifi Services", text: "Router setup, weak signal, and home or office network connection." },
     { title: "AMC Services", text: "Regular maintenance, repair and support through the year." }
   ],

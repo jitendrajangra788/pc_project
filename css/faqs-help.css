@@ -716,13 +716,22 @@
   box-shadow: 0 12px 28px rgba(21, 128, 61, 0.35);
 }
 
-.help-page ~ .book-bar,
-body:has(.help-page) .book-bar {
-  display: none !important;
+@media (min-width: 641px) {
+  .help-page ~ .book-bar,
+  body:has(.help-page) .book-bar {
+    display: none !important;
+  }
+
+  body:has(.help-page).has-book-bar {
+    padding-bottom: 0;
+  }
 }
 
-body:has(.help-page).has-book-bar {
-  padding-bottom: 0;
+@media (max-width: 640px) {
+  .help-page .wa-float,
+  body:has(.help-page) .wa-float {
+    display: none !important;
+  }
 }
 
 @media (max-width: 1080px) {

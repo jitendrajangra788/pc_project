@@ -42,14 +42,6 @@ const services = {
       "Support after the system is installed"
     ]
   },
-  "Data Recovery Services": {
-    text: "Data recovery from hard drives, SSDs and other storage, including devices that do not turn on.",
-    points: [
-      "Hard drives, SSDs and other storage",
-      "Recovery when the system is not powering on",
-      "Backup and transfer onto another device"
-    ]
-  },
   "Wifi Services": {
     text: "Router setup, weak-signal fixes and network connection for homes and offices in Jaipur.",
     points: [
@@ -82,7 +74,6 @@ const deviceByService = {
   "Apple Services": "Laptop",
   "Printer Services": "Printer",
   "CCTV Services": "CCTV",
-  "Data Recovery Services": "Other",
   "Wifi Services": "Router / Network",
   "AMC Services": "Multiple devices",
   "Custom PC Build": "Desktop"
@@ -433,7 +424,12 @@ navLinks.forEach((link) => {
 
   const bookBar = document.createElement("a");
   bookBar.className = "book-bar";
-  bookBar.textContent = "Book now";
+  bookBar.setAttribute("aria-label", "Book now");
+  bookBar.innerHTML =
+    '<span class="book-bar-label">Book now</span>' +
+    '<span class="book-bar-go" aria-hidden="true">' +
+      '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>' +
+    "</span>";
   const onBookPage = /\/book\/?$/.test(location.pathname);
   bookBar.href = onBookPage ? "#booking" : "/book";
   document.body.appendChild(bookBar);
@@ -649,7 +645,6 @@ function serviceIcon(title, index) {
   if (name.indexOf("cctv") !== -1 || name.indexOf("camera") !== -1) return "#i-cctv";
   if (name.indexOf("wifi") !== -1 || name.indexOf("wi-fi") !== -1 || name.indexOf("network") !== -1) return "#i-wifi";
   if (name.indexOf("amc") !== -1) return "#i-shield";
-  if (name.indexOf("data") !== -1 || name.indexOf("recover") !== -1) return "#i-tool";
   if (name.indexOf("computer") !== -1 || name.indexOf("desktop") !== -1 || name.indexOf("custom pc") !== -1) return "#i-desktop";
   const fallback = ["#i-desktop", "#i-laptop", "#i-printer", "#i-cctv", "#i-wifi", "#i-shield", "#i-tool"];
   return fallback[index % fallback.length];
@@ -663,7 +658,6 @@ function servicePhoto(title) {
   if (name.indexOf("cctv") !== -1 || name.indexOf("camera") !== -1) return "images/cat-cctv.jpg";
   if (name.indexOf("wifi") !== -1 || name.indexOf("wi-fi") !== -1 || name.indexOf("network") !== -1) return "images/slow-wifi.jpg";
   if (name.indexOf("amc") !== -1) return "images/computer-amc.jpg";
-  if (name.indexOf("data") !== -1 || name.indexOf("recover") !== -1) return "images/cat-data.jpg";
   if (name.indexOf("custom pc") !== -1 || name.indexOf("computer") !== -1 || name.indexOf("desktop") !== -1) return "images/cat-pc.jpg";
   return "images/cat-laptop.jpg";
 }
@@ -689,7 +683,6 @@ const serviceSearchMeta = {
   "Apple Services": "apple mac macbook imac",
   "Printer Services": "printer print ink jam wifi share",
   "CCTV Services": "cctv camera security install shop home",
-  "Data Recovery Services": "data recovery hard disk hdd ssd lost files",
   "Wifi Services": "wifi wi-fi router network signal internet",
   "AMC Services": "amc maintenance yearly support contract office",
   "Custom PC Build": "custom pc build gaming editing assemble"
